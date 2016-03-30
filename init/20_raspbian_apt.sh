@@ -8,23 +8,32 @@ is_raspbian || return 1
 
 
 #
+## install hardware relevant stuff
+#
+
+#sudo apt-get install rpi-update
+#sudo rpi-update
+#sudo reboot
+
+
+
+
+#
+## rename device
+#
+
+#...
+
+
+
+
+#
 ## update and upgrade packages
 #
 
 e_header "Updating APT"
 sudo apt-get -qq update
 sudo apt-get -qq dist-upgrade
-
-
-
-
-#
-## install hardware
-#
-
-#sudo apt-get install rpi-update
-#sudo rpi-update
-#sudo reboot
 
 
 
@@ -44,10 +53,11 @@ packages=(
   tk-dev
   libssl-dev
   openssl
-  git-core
   htop
   nmap
   tree
+  tmux
+  ranger
 )
 
 # 
