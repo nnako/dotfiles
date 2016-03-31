@@ -91,7 +91,7 @@ sudo easy_install pip
 
 e_header "Installing Virtual Environments"
 
-# install packages
+# install / update packages
 sudo pip install virtualenv
 sudo pip install virtualenvwrapper
 
@@ -107,11 +107,15 @@ echo "source /usr/local/bin/virtualenvwrapper.sh" >> $HOME/.profile
 source $HOME/.profile
 
 # ENV for python v2 and update pip
-mkvirtualenv ${sPython2venv} -p ${sPythonBaseDir}/${sPython2name}/bin/${sPython2name}
-sudo pip install -IU pip
-deactivate
+if [[ ! -d $HOME/.virtualenvs/${sPython2venv} ]]; then
+    mkvirtualenv ${sPython2venv} -p ${sPythonBaseDir}/${sPython2name}/bin/${sPython2name}
+    sudo pip install -IU pip
+    deactivate
+fi
 
 # ENV for python v3 and update pip
-mkvirtualenv ${sPython3venv} -p ${sPythonBaseDir}/${sPython3name}/bin/${sPython3name}
-sudo pip install -IU pip
-deactivate
+if [[ ! -d $HOME/.virtualenvs/${sPython3venv} ]]; then
+    mkvirtualenv ${sPython3venv} -p ${sPythonBaseDir}/${sPython3name}/bin/${sPython3name}
+    sudo pip install -IU pip
+    deactivate
+fi
