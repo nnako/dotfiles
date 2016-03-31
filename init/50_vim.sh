@@ -23,10 +23,13 @@ e_header "Installing Vim Plugins"
 
 # define plugin locations
 lstPluginUrl=(
+  https://github.com/MarcWeber/vim-addon-mw-utils.git
   https://github.com/tpope/vim-fugitive.git
-  https://github.com/tpope/fugitive.git
+  https://github.com/fidian/hexmode.git
   https://github.com/xolox/vim-session.git
   https://github.com/klen/python-mode.git
+  https://github.com/vim-airline/vim-airline.git
+  https://github.com/scrooloose/nerdcommenter.git
 )
 
 # strip plugin names from path
