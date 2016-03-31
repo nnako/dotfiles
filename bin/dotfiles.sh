@@ -265,7 +265,7 @@ function do_stuff() {
   #
   ## list predeclared function and file names of appropriate folder
   #
-  
+
   # get file name list from appropriate folder
   local base dest skip
   local files=($DOTFILES/$1/*)
@@ -273,7 +273,7 @@ function do_stuff() {
   # append file name list to appropriate existing function "_files"
   # only applicable for INIT type activities
   [[ $(declare -f "$1_files") ]] && files=($($1_files "${files[@]}"))
-  
+
 
 
 
@@ -281,33 +281,33 @@ function do_stuff() {
   ## abort if no files were found for appropriate folder
   #
   if (( ${#files[@]} == 0 )); then return; fi
-  
-  
-  
-  
+
+
+
+
   #
   ## run _header function of appropriate folder (only if declared)
   #
   [[ $(declare -f "$1_header") ]] && "$1_header"
-  
-  
-  
-  
+
+
+
+
   #
   ## iterate over file list and do the activity
   #
-  
+
   for file in "${files[@]}"; do
-  
+
     #
 	## construct new path string for file found inside folder
 	#
     base="$(basename $file)"
     dest="$HOME/$base"
-	
+
 	# if test function is declared
     if [[ $(declare -f "$1_test") ]]; then
-	
+
       #
       ## run _test function of appropriate folder (only if declared)
       #
@@ -318,17 +318,17 @@ function do_stuff() {
         e_error "Skipping ~/$base, $skip."
         continue
       fi
-	  
+
       #
       ## back up already existing files
       #
 
       # if destination file already exists in ~/.
       if [[ -e "$dest" ]]; then
-	  
+
         # echo message
         e_arrow "Backing up ~/$base."
-		
+
         # Set backup flag, so a nice message can be shown at the end
         backup=1
 
@@ -454,6 +454,9 @@ do_stuff "init"
 if [[ "$backup" ]]; then
   echo -e "\nBackups were moved to ~/${backup_dir#$HOME/}"
 fi
+
+# back into user's home folder
+cd $HOME
 
 # All done!
 e_header "All done!"
