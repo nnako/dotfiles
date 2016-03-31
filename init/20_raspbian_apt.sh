@@ -52,6 +52,8 @@ sudo rpi-update
 packages=(
   build-essential
   libncursesw5-dev
+  libevent-1.4
+  libevent-dev
   libgdbm-dev
   libc6-dev
   zlib1g-dev
