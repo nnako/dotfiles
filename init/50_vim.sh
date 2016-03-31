@@ -10,7 +10,7 @@ sPluginBasePath=$HOME/.vim/bundle # for pathogen plugin management
 
 e_header "Installing Vim program file"
 
-sudo apt-get install vim
+sudo apt-get install vim -y
 
 
 
