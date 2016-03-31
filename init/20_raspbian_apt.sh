@@ -8,17 +8,6 @@ is_raspbian || return 1
 
 
 #
-## install hardware relevant stuff
-#
-
-#sudo apt-get install rpi-update
-#sudo rpi-update
-#sudo reboot
-
-
-
-
-#
 ## rename device
 #
 
@@ -34,6 +23,23 @@ is_raspbian || return 1
 e_header "Updating APT"
 sudo apt-get -qq update
 sudo apt-get -qq dist-upgrade
+
+
+
+
+#
+## install hardware relevant stuff
+#
+
+e_header "Configuring HARDWARE"
+
+# keyboard, display and timezone
+sudo dpkg-reconfigure locales
+sudo dpkg-reconfigure keyboard-configuration
+sudo dpkg-reconfigure tzdata
+sudo apt-get install rpi-update
+sudo rpi-update
+#sudo reboot
 
 
 
@@ -60,12 +66,12 @@ packages=(
   ranger
 )
 
-# 
+# filter packages which have already been installed
 packages=($(setdiff "${packages[*]}" "$(dpkg --get-selections | grep -v deinstall | awk '{print $1}')"))
 
 # install using apt-get
 if (( ${#packages[@]} > 0 )); then
-  e_header "Installing APT packages: ${packages[*]}"
+  e_header "Installing APT packages\n${packages[*]}"
   for package in "${packages[@]}"; do
     sudo apt-get -qq install "$package"
   done
