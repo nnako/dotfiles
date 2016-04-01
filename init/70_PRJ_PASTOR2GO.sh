@@ -34,7 +34,7 @@ pip install --editable .
 #
 
 # libffi-dev
-sudo apt-get install libffi-dev   # required for mailbot module
+sudo apt-get -qq install libffi-dev   # required for mailbot module
 
 
 
@@ -43,17 +43,36 @@ sudo apt-get install libffi-dev   # required for mailbot module
 ## get and install relevant python modules from source
 # other modules are handled from within the project's setup.py
 
-# click
-#...
 
-# mailbot
-#...
 
-# freeplane api
-#...
 
-# pyzmail
-#...
+#
+## get mailbot plugin from source
+#
+
+# get source
+git clone $libpath_mailbot $HOME/LIB__mailbot
+
+# build mailbot into paython packages
+cd $HOME/LIB__mailbot
+python setup.py install
+
+
+
+
+#
+## get freeplane api
+#
+
+# get source
+git clone $libpath_freeplane $HOME/LIB__freeplane_api
+
+# get dependencies
+pip install html2text
+
+# build freeplane api into python packages
+cd $HOME/LIB__freeplane_api
+python setup.py install
 
 
 
@@ -63,4 +82,11 @@ sudo apt-get install libffi-dev   # required for mailbot module
 #
 
 # dropbox uploader
-#...
+git clone $apppath_dropbox $HOME/APP__dropbox_uploader
+
+
+
+
+# deactivate virtual environment
+deactivate
+
