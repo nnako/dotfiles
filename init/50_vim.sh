@@ -1,5 +1,6 @@
 # path settings
 sPluginBasePath=$HOME/.vim/bundle # for pathogen plugin management
+sVimSourceUrl=https://github.com/vim/vim.git
 
 
 
@@ -14,14 +15,14 @@ if [[ ! "$(type -P vim)" ]]; then
     e_header "Installing Vim from source"
 
     # get the necessary packages
-    sudo apt-get install libncurses5-dev python-dev
+    sudo apt-get install libncurses5-dev python-dev -y
 
     # remove already existing packages if present
     #sudo apt-get remove vim vim-tiny vim-common vim-runtime
 
     # get the sources
     cd /tmp
-    git clone https://github.com/vim/vim.git
+    git clone $sVimSourceUrl
     cd vim
 
     # configure and compile
