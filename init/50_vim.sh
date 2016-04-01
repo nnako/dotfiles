@@ -5,12 +5,31 @@ sPluginBasePath=$HOME/.vim/bundle # for pathogen plugin management
 
 
 #
-## install package
+## install vim from source
 #
 
-e_header "Installing Vim program file"
+# only install if not already installed
+if [[ ! "$(type -P vim)" ]]; then
 
-sudo apt-get install vim -y
+    e_header "Installing Vim from source"
+
+    # get the necessary packages
+    sudo apt-get install libncurses5-dev python-dev
+
+    # remove already existing packages if present
+    #sudo apt-get remove vim vim-tiny vim-common vim-runtime
+
+    # get the sources
+    cd /tmp
+    git clone https://github.com/vim/vim.git
+    cd vim
+
+    # configure and compile
+    ./configure --with-features=huge --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config --prefix=/usr
+    make VIMRUNTIMEDIR=/usr/share/vim/vim74
+    sudo make install
+
+fi
 
 
 
@@ -87,7 +106,11 @@ done
 
 
 #
-## get configurations
+## set configurations
 #
 
 e_header "Configuring Vim"
+
+# python mode
+#... deactivate...
+
