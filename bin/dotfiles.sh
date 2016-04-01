@@ -356,6 +356,7 @@ function do_stuff() {
 
 
 
+# default time to wait when prompting menu
 export prompt_delay=5
 
 # Ensure that we can actually, like, compile anything.
