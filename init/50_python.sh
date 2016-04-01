@@ -26,7 +26,7 @@ sPythonBaseDir=/opt      # base folder name fo install python versions
 
 if [[ ! -d $sPythonBaseDir/$sPython2name ]]; then
 
-    e_header "Installing Python v${vPython2} from source into ${sPythonBaseDir}"
+    e_header "... Python v${vPython2} from source into ${sPythonBaseDir}"
 
     # install python v2 from source
     cd /tmp
@@ -50,7 +50,7 @@ fi
 
 if [[ ! -d $sPythonBaseDir/$sPython3name ]]; then
 
-    e_header "Installing Python v${vPython3} from source into ${sPythonBaseDir}"
+    e_header "... Python v${vPython3} from source into ${sPythonBaseDir}"
 
     # install python v3 from source
     cd /tmp
@@ -77,10 +77,15 @@ fi
 ## install setuptools as well as pip
 #
 
-#wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
-#sudo python get-pip.py
-sudo apt-get install python-setuptools -y
-sudo easy_install pip
+# set module name
+sModuleName=python-setuptools
+
+# install the module
+if [[ ! "$(type -P ${sModuleName})" ]]; then
+  e_header "Installing " ${sModuleName}
+  sudo apt-get -qq install ${sModuleName} -y
+  sudo easy_install pip
+fi
 
 
 
@@ -92,8 +97,8 @@ sudo easy_install pip
 e_header "Installing Virtual Environments"
 
 # install / update packages
-sudo pip install virtualenv
-sudo pip install virtualenvwrapper
+sudo pip -qq install virtualenv
+sudo pip -qq install virtualenvwrapper
 
 # insert necessary rows into .profile file
 sed -i -e '/^WORKON_HOME\b/d' $HOME/.profile
