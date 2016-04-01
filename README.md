@@ -14,7 +14,10 @@ After that, type in this command line:
 
 When you cloned this repository as "dotfiles" as your own repository, every *common* installations will run fine and create my favorite development environment on your computer. It consists of the following components:
 
-* expand SD card to provide full capacity
+* expand SD card to provide full capacity (requires a reboot)
+
+after the restart, please just re-enter the command lines you see above. Then...
+
 * hardware configuration (choice of language,...)
 * update of common packages and RPi packages
 * installation of python2 and python3 versions under `/opt/python...`
