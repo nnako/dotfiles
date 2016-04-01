@@ -17,6 +17,15 @@ is_raspbian || return 1
 
 
 #
+## run device's configuration tool (e.g. to resize SD CARD)
+#
+
+sudo raspi-config
+
+
+
+
+#
 ## update and upgrade packages
 #
 
@@ -37,7 +46,7 @@ e_header "Configuring HARDWARE"
 sudo dpkg-reconfigure locales
 sudo dpkg-reconfigure keyboard-configuration
 sudo dpkg-reconfigure tzdata
-sudo apt-get install rpi-update
+sudo apt-get -qq install rpi-update
 sudo rpi-update
 #sudo reboot
 
@@ -52,7 +61,6 @@ sudo rpi-update
 packages=(
   build-essential
   libncursesw5-dev
-  libevent-1.4
   libevent-dev
   libgdbm-dev
   libc6-dev
