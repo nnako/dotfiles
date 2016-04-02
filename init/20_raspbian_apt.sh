@@ -8,52 +8,6 @@ is_raspbian || return 1
 
 
 #
-## rename device
-#
-
-#...
-
-
-
-
-#
-## run device's configuration tool (e.g. to resize SD CARD)
-#
-
-sudo raspi-config
-
-
-
-
-#
-## update and upgrade packages
-#
-
-e_header "Updating APT"
-sudo apt-get -qq update
-sudo apt-get -qq dist-upgrade
-
-
-
-
-#
-## install hardware relevant stuff
-#
-
-e_header "Configuring HARDWARE"
-
-# keyboard, display and timezone
-sudo dpkg-reconfigure locales
-sudo dpkg-reconfigure keyboard-configuration
-sudo dpkg-reconfigure tzdata
-sudo apt-get -qq install rpi-update
-sudo rpi-update
-#sudo reboot
-
-
-
-
-#
 ## install necessary packages
 #
 
@@ -86,3 +40,12 @@ if (( ${#packages[@]} > 0 )); then
     sudo apt-get -qq install "$package"
   done
 fi
+
+
+
+
+#
+## rename device
+#
+
+#...
