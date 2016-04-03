@@ -100,17 +100,6 @@ e_header "Installing Virtual Environments"
 sudo pip -qq install virtualenv
 sudo pip -qq install virtualenvwrapper
 
-# insert necessary rows into .profile file
-sed -i -e '/^WORKON_HOME\b/d' $HOME/.profile
-echo "" >> $HOME/.profile
-echo "# settings for virtualenv" >> $HOME/.profile
-echo "WORKON_HOME=$HOME/.virtualenvs" >> $HOME/.profile
-sed -i -e '/^PROJECT_HOME\b/d' $HOME/.profile
-echo "PROJECT_HOME=$HOME/PRJ" >> $HOME/.profile
-sed -i -e '/source \/usr\/local\/bin\/virtualenvwrapper.sh/d' $HOME/.profile
-echo "source /usr/local/bin/virtualenvwrapper.sh" >> $HOME/.profile
-source $HOME/.profile
-
 # ENV for python v2 and update pip
 if [[ ! -d $HOME/.virtualenvs/${sPython2venv} ]]; then
     mkvirtualenv ${sPython2venv} -p ${sPythonBaseDir}/${sPython2name}/bin/${sPython2name}
