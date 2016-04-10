@@ -1,0 +1,12 @@
+# this file
+#.gitignore
+
+# Lots of junk goes in here.
+/caches/
+/backups/
+
+# Don't commit Vim stuff
+/link/.vim
+
+# Ignore any file with LOCAL in the name (good for per-machine vars/functions)
+*LOCAL*
