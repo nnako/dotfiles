@@ -1,11 +1,20 @@
-# Where the magic happens.
+#
+## put DOTFILES variable into environment
+#
+
 export DOTFILES=~/.dotfiles
 
-# Add binaries into the path
+#
+## add dotfiles' binaries into the path
+#
+
 PATH=$DOTFILES/bin:$PATH
 export PATH
 
-# Source all files in "source"
+#
+## define function to source all files in "source" folder
+#
+
 function src() {
   local file
   if [[ "$1" ]]; then
@@ -17,9 +26,16 @@ function src() {
   fi
 }
 
-# Run dotfiles script, then source.
+#
+## define function to run the dotfilles mechanism then source files
+#
+
 function dotfiles() {
   $DOTFILES/bin/dotfiles.sh "$@" && src
 }
+
+#
+## source all files from "source"
+#
 
 src
