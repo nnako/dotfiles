@@ -94,9 +94,9 @@ set clipboard=unnamed
 
 " disable backup and swap files {{{
 "
-"set nobackup
-"set nowritebackup
-"set noswapfile
+set nobackup
+set nowritebackup
+set noswapfile
 "
 " }}}
 " enable backup and swap files in separate folder {{{
