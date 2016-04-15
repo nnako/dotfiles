@@ -102,6 +102,15 @@ function prompt_svn() {
   fi
 }
 
+# PYTHON VIRTUAL ENVIRONMENT info.
+function prompt_venv() {
+  prompt_getcolors
+  local info="$(virtualenvwrapper_get_python_version 2> /dev/null)"
+  if [[ ${info:1:1} == "." ]]; then
+    echo "$c1[${c0}PY${info:0:1}${info:2:1}$c1]$c9"
+  fi
+}
+
 # Maintain a per-execution call stack.
 prompt_stack=()
 trap 'prompt_stack=("${prompt_stack[@]}" "$BASH_COMMAND")' DEBUG
@@ -119,16 +128,34 @@ function prompt_command() {
   # While the simple_prompt environment var is set, disable the awesome prompt.
   [[ "$simple_prompt" ]] && PS1='\n$ ' && return
 
+  # set short names for color access
   prompt_getcolors
+
+  #
+  ## output prompt to console
+  #
+
   # http://twitter.com/cowboy/status/150254030654939137
+
+  # skip one row
   PS1="\n"
+
   # misc: [cmd#:hist#]
   # PS1="$PS1$c1[$c0#\#$c1:$c0!\!$c1]$c9"
+
   # path: [user@host:path]
   PS1="$PS1$c1[$c0\u$c1@$c0\h$c1:$c0\w$c1]$c9"
+
+  # go to next row
   PS1="$PS1\n"
+
   # date: [HH:MM:SS]
   PS1="$PS1$c1[$c0$(date +"%H$c1:$c0%M$c1:$c0%S")$c1]$c9"
+
+  # python virtual environment identifier
+  PS1="$PS1$(prompt_venv)"
+
+  # version control itentifiers
   # svn: [repo:lastchanged]
   PS1="$PS1$(prompt_svn)"
   # hg:  [branch:flags]
