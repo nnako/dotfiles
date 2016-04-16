@@ -99,13 +99,23 @@ set nowritebackup
 set noswapfile
 "
 " }}}
-" enable backup and swap files in separate folder {{{
+" enable backup and swap files in separate folder on WINDOWS SYSTEM {{{
 "
 "set backup
 set backupdir=c:\tmp,c:\temp,c:\WINDOWS\Temp,c:\_TEMP,d:\temp,d:\_TEMP,.
 "set backupskip=c:\WINDOWS\Temp
 set directory=c:\tmp,c:\temp,c:\WINDOWS\Temp,c:\_TEMP,d:\temp,d:\_TEMP,.
 set undodir=c:\WINDOWS\Temp
+"set writebackup
+"
+" }}}
+" set temporary folder (necessary for diff command) on LINUX SYSTEM {{{
+"
+"set backup
+"set backupdir=c:\tmp,c:\temp,c:\WINDOWS\Temp,c:\_TEMP,d:\temp,d:\_TEMP,.
+"set backupskip=c:\WINDOWS\Temp
+"set directory=c:\tmp,c:\temp,c:\WINDOWS\Temp,c:\_TEMP,d:\temp,d:\_TEMP,.
+"set undodir=c:\WINDOWS\Temp
 "set writebackup
 "
 " }}}
