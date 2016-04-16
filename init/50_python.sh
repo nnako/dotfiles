@@ -100,14 +100,8 @@ e_header "Installing Virtual Environments"
 sudo pip -qq install virtualenv
 sudo pip -qq install virtualenvwrapper
 
-# PAUSE
-read -p "PRESS <ENTER> to resume (FIRST POINT)"
-
 # update configurations for current console
 source ~/.profile
-
-# PAUSE
-read -p "PRESS <ENTER> to resume (SECOND POINT)"
 
 # ENV for python v2 and update pip
 if [[ ! -d $HOME/.virtualenvs/${sPython2venv} ]]; then
