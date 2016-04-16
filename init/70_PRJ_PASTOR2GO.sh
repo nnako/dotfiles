@@ -43,6 +43,8 @@ sudo apt-get -qq install libffi-dev   # required for mailbot module
 ## get and install relevant python modules from source
 # other modules are handled from within the project's setup.py
 
+# pyzmail
+# click
 
 
 
