@@ -6,7 +6,7 @@ prjname="PRJ__PASTOR2GO"
 prjpath="pi@192.168.1.49:/home/pi/usbdrv/" $prjname ".git"
 libpath_mailbot="pi@192.168.1.49:/home/pi/usbdrv/_python/LIB__mailbot.git"
 libpath_freeplane="pi@192.168.1.49:/home/pi/usbdrv/_python/LIB__freeplane_api.git"
-apppath_dropbox="pi@192.168.1.49:/home/pi/usbdrv/_bash/APP__dropbox_uploader.git"
+apppath_dropbox="https://github.com/andreafabrizi/Dropbox-Uploader.git"
 
 # move into Python v2 virtual environment
 workon $sPython2venv
