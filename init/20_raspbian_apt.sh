@@ -45,6 +45,19 @@ fi
 
 
 #
+## global git parameters
+#
+
+# email
+git config --global user.email "nnako@web.de"
+
+# name
+git config --global user.name "nnako"
+
+
+
+
+#
 ## rename device
 #
 
