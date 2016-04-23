@@ -2,7 +2,8 @@
 ## source code path settings
 #
 
-prjpath="pi@192.168.1.49:/home/pi/usbdrv/PRJ__PASTOR2GO.git"
+prjname="PRJ__PASTOR2GO"
+prjpath="pi@192.168.1.49:/home/pi/usbdrv/" $prjname ".git"
 libpath_mailbot="pi@192.168.1.49:/home/pi/usbdrv/_python/LIB__mailbot.git"
 libpath_freeplane="pi@192.168.1.49:/home/pi/usbdrv/_python/LIB__freeplane_api.git"
 apppath_dropbox="pi@192.168.1.49:/home/pi/usbdrv/_bash/APP__dropbox_uploader.git"
@@ -18,13 +19,16 @@ workon $sPython2venv
 #
 
 # get source code
-git clone $prjpath $HOME/PRJ__PASTOR2GO
+git clone $prjpath $HOME/$prjname
 
 # move into project folder
-cd $HOME/PRJ__PASTOR2GO
+cd $HOME/$prjname
 
 # prepare executable application (neccessity of click module)
 pip install --editable .
+
+# create temporary project folder
+mkdir $HOME/.$prjname
 
 
 
