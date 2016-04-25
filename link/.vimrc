@@ -83,6 +83,13 @@ set expandtab
 set clipboard=unnamed
 "
 " }}}
+" CHARACTER ENCODING settings {{{
+"
+
+" use UTF-8 as default character encoding for text files
+set encoding=utf-8
+"
+" }}}
 
 
 
