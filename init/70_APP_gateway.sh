@@ -99,9 +99,9 @@ python setup.py install
 ## get relevant applications
 #
 
-# get source (only if directory was not present)
-if [[ ! -d "$HOME/$appname_dropbox" ]]; then
-    git clone $apppath_dropbox $HOME/$appname_dropbox
+# get Dropbox-Uploader source (only if directory was not present)
+if [[ ! -d "$HOME/APP__dropbox_uploader" ]]; then
+    git clone $apppath_dropbox $HOME/APP__dropbox_uploader
 fi
 
 
