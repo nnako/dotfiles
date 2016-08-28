@@ -30,8 +30,10 @@ cd $HOME/$prjname
 # prepare executable application (neccessity of click module)
 #pip install --editable .
 
-# create temporary project folder
-mkdir $HOME/.$prjname
+# create temporary project folder (if not existent)
+if [[ ! -d "$HOME/.$prjname" ]]; then
+    mkdir $HOME/.$prjname
+fi
 
 
 
