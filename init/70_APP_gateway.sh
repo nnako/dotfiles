@@ -21,8 +21,10 @@ workon $sPython2venv
 ## get and prepare project files
 #
 
-# get source code
-git clone $prjpath $HOME/$prjname
+# get project source code (if not already present)
+if [[ ! -d "$HOME/$prjname" ]]; then
+    git clone $prjpath $HOME/$prjname
+fi
 
 # move into project folder
 cd $HOME/$prjname
