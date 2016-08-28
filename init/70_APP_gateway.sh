@@ -3,13 +3,13 @@
 #
 
 prjname="APP__gateway"
-prjpath="pi@192.168.1.49:/home/pi/usbdrv/" $prjname ".git"
+prjpath="pi@192.168.1.49:/home/pi/usbdrv/$prjname.git"
 libname_mailbot="LIB__mailbot"
-libpath_mailbot="pi@192.168.1.49:/home/pi/usbdrv/_python/" $libname_mailbot ".git"
+libpath_mailbot="pi@192.168.1.49:/home/pi/usbdrv/_python/$libname_mailbot.git"
 libname_freeplane="LIB__freeplane_api"
-libpath_freeplane="pi@192.168.1.49:/home/pi/usbdrv/_python/" $libname_freeplane ".git"
+libpath_freeplane="pi@192.168.1.49:/home/pi/usbdrv/_python/$libname_freeplane.git"
 appname_dropbox="Dropbox-Uploader"
-apppath_dropbox="https://github.com/andreafabrizi/" $appname_dropbox ".git"
+apppath_dropbox="https://github.com/andreafabrizi/$appname_dropbox.git"
 
 # move into Python v2 virtual environment
 workon $sPython2venv
