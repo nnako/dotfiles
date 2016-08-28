@@ -64,8 +64,10 @@ pip install pyzmail
 ## get mailbot plugin from source
 #
 
-# get source
-git clone $libpath_mailbot $HOME/$libname_mailbot
+# get source (only if directory was not present)
+if [[ ! -d "$HOME/$libname_mailbot" ]]; then
+    git clone $libpath_mailbot $HOME/$libname_mailbot
+fi
 
 # build mailbot into paython packages
 cd $HOME/$libname_mailbot
@@ -78,8 +80,10 @@ python setup.py install
 ## get freeplane api
 #
 
-# get source
-git clone $libpath_freeplane $HOME/$libname_freeplane
+# get source (only if directory was not present)
+if [[ ! -d "$HOME/$libname_freeplane" ]]; then
+    git clone $libpath_freeplane $HOME/$libname_freeplane
+fi
 
 # get dependencies
 pip install html2text
@@ -95,8 +99,10 @@ python setup.py install
 ## get relevant applications
 #
 
-# dropbox uploader
-git clone $apppath_dropbox $HOME/$appname_dropbox
+# get source (only if directory was not present)
+if [[ ! -d "$HOME/$appname_dropbox" ]]; then
+    git clone $apppath_dropbox $HOME/$appname_dropbox
+fi
 
 
 
