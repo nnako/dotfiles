@@ -3,7 +3,7 @@
 #
 
 prjname="APP__gateway"
-prjpath="pi@192.168.1.49:/home/pi/usbdrv/$prjname.git"
+prjpath="pi@192.168.1.49:/home/pi/usbdrv/_python/$prjname.git"
 libname_mailbot="LIB__mailbot"
 libpath_mailbot="pi@192.168.1.49:/home/pi/usbdrv/_python/$libname_mailbot.git"
 libname_freeplane="LIB__freeplane_api"
