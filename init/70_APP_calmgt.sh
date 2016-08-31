@@ -20,12 +20,6 @@ apppath_dropbox="https://github.com/andreafabrizi/$appname_dropbox.git"
 
 
 
-# move into Python v2 virtual environment
-workon $sPython2venv
-
-
-
-
 #
 ## get and prepare project files
 #
@@ -49,6 +43,12 @@ fi
 
 
 
+# move into Python v2 virtual environment
+workon $sPython2venv
+
+
+
+
 #
 ## get / update relevant packages
 #
@@ -62,6 +62,12 @@ fi
 #
 ## get and install relevant python modules from source
 # other modules are handled from within the project's setup.py
+
+# EXCEL read
+pip install xlrd
+
+# OWNCLOUD client
+pip install pyocclient
 
 # ...
 #pip install argparse
