@@ -18,7 +18,7 @@ workon $sPython2venv
 
 
 #
-## get and prepare project files
+## get and prepare project folders
 #
 
 # get project source code (if not already present)
@@ -44,8 +44,14 @@ fi
 ## get relevant packages (if not already present)
 #
 
-# libffi-dev
+# email
 sudo apt-get -qq install libffi-dev   # required for mailbot module
+
+# audio
+sudo apt-get -qq install alsa         # required for sound output
+sudo apt-get -qq install mplayer      # required for sound replay
+sudo apt-get -qq install festival     # festival speech package and application
+sudo apt-get -qq install espeak       # espeak speech package and application
 
 
 
@@ -71,7 +77,7 @@ if [[ ! -d "$HOME/$libname_mailbot" ]]; then
     git clone $libpath_mailbot $HOME/$libname_mailbot
 fi
 
-# build mailbot into paython packages
+# build mailbot into python packages
 cd $HOME/$libname_mailbot
 python setup.py install
 
