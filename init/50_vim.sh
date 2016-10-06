@@ -51,6 +51,7 @@ lstPluginUrl=(
   https://github.com/vim-airline/vim-airline.git
   https://github.com/scrooloose/nerdcommenter.git
   https://github.com/scrooloose/nerdtree.git
+  https://github.com/tmhedberg/simpylfold.git
 )
 #https://github.com/klen/python-mode.git
 
