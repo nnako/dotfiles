@@ -53,8 +53,7 @@ workon $sPython2venv
 ## get / update relevant packages
 #
 
-# ...
-#sudo apt-get -qq install libffi-dev   # required for mailbot module
+sudo apt-get -qq install remind   # for reminder application to be executable
 
 
 
