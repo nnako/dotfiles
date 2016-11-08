@@ -54,6 +54,7 @@ workon $sPython2venv
 #
 
 sudo apt-get -qq install remind   # for reminder application to be executable
+sudo apt-get -qq install sendemail   # to be able to send emails from within CRON
 
 
 

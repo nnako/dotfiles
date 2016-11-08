@@ -46,6 +46,9 @@ fi
 
 # email
 sudo apt-get -qq install libffi-dev   # required for mailbot module
+sudo apt-get -qq install sendemail    # required for email attachments
+sudo apt-get -qq install libio-socket-ssl-perl  # required for sendemail on RPi
+sudo apt-get -qq install libnet-ssleay-perl     # required for sendemail on RPi
 
 # audio
 sudo apt-get -qq install alsa         # required for sound output
@@ -60,11 +63,9 @@ sudo apt-get -qq install espeak       # espeak speech package and application
 ## get and install relevant python modules from source
 # other modules are handled from within the project's setup.py
 
-# pyzmail
 pip install pyzmail
-
-# argparse
-#pip install argparse
+pip install pyocclient
+pip install argparse
 
 
 
