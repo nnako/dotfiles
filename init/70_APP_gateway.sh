@@ -44,17 +44,20 @@ fi
 ## get relevant packages (if not already present)
 #
 
-# email
+# email processing
 sudo apt-get -qq install libffi-dev   # required for mailbot module
 sudo apt-get -qq install sendemail    # required for email attachments
 sudo apt-get -qq install libio-socket-ssl-perl  # required for sendemail on RPi
 sudo apt-get -qq install libnet-ssleay-perl     # required for sendemail on RPi
 
-# audio
+# audio processing
 sudo apt-get -qq install alsa         # required for sound output
 sudo apt-get -qq install mplayer      # required for sound replay
 sudo apt-get -qq install festival     # festival speech package and application
 sudo apt-get -qq install espeak       # espeak speech package and application
+
+# image processing
+sudo apt-get -qq install imagemagick  # for operations on bitmap graphics
 
 
 
