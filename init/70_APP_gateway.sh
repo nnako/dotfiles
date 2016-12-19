@@ -58,6 +58,7 @@ sudo apt-get -qq install espeak       # espeak speech package and application
 
 # image processing
 sudo apt-get -qq install imagemagick  # for operations on bitmap graphics
+sudo apt-get -qq install pdftk        # for operations on PDF files
 
 
 
