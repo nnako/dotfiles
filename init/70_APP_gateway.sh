@@ -70,6 +70,8 @@ sudo apt-get -qq install pdftk        # for operations on PDF files
 pip install pyzmail
 pip install pyocclient
 pip install argparse
+pip install configparser
+
 
 
 
