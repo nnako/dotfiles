@@ -69,8 +69,8 @@ pip install xlrd
 # OWNCLOUD client
 pip install pyocclient
 
-# ...
-#pip install argparse
+# INI file management
+pip install configparser
 
 
 
