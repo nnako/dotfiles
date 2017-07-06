@@ -194,6 +194,11 @@ nnoremap <leader>h *<C-O>
 "nnoremap <leader>H *<C-O>:AckFromSearch!<CR>
 "
 " }}}
+" [NORMAL] highlight word at cursor and search in project files {{{
+"
+nnoremap <leader>H *<C-O>:execute "vimgrep //gj **/*.*" <Bar> cw<CR>
+"
+" }}}
 " [NORMAL] edit VIMRC in new vertical split {{{
 "
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
