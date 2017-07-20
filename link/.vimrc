@@ -146,6 +146,7 @@ let g:pymode_rope_autoimport = 0
 " VIM-SESSION -> deactivate auto save question {{{
 "
 let g:session_autosave = 'no'
+set sessionoptions-=buffers
 "
 " }}}
 " SIMPLYFOLD  -> settings {{{
