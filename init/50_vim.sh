@@ -10,7 +10,7 @@ sVimSourceUrl=https://github.com/vim/vim.git
 #
 
 # only install if not already installed
-if [[ ! "$(type -P vim)" ]]; then
+#if [[ ! "$(type -P vim)" ]]; then
 
     e_header "Installing Vim from source"
 
@@ -18,19 +18,20 @@ if [[ ! "$(type -P vim)" ]]; then
     sudo apt-get install libncurses5-dev python-dev -y
 
     # remove already existing packages if present
-    #sudo apt-get remove vim vim-tiny vim-common vim-runtime
+    sudo apt-get remove vim vim-tiny vim-common vim-runtime
 
     # get the sources
     cd /tmp
     git clone $sVimSourceUrl
     cd vim
 
-    # configure and compile
+    # configure and compile any newest version into general folder
     ./configure --with-features=huge --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config --prefix=/usr
-    make VIMRUNTIMEDIR=/usr/share/vim/vim74
+    #make VIMRUNTIMEDIR=/usr/share/vim/vim74
+    make VIMRUNTIME=/usr/share/vim
     sudo make install
 
-fi
+#fi
 
 
 
