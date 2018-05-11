@@ -2,6 +2,12 @@
 " BASIC SETTINGS
 "#############################################
 
+" detect system configuration {{{
+"
+let s:is_windows = has('win32') || has('win64')
+let s:is_nvim = has('nvim')
+"
+" }}}
 " make vim incompatible to vi (better settings than VI) {{{
 "
 set nocompatible
@@ -374,13 +380,12 @@ autocmd bufwritepost _vimrc source %
 "#############################################
 
 
-"
-" commenting of lines
+" [comments] - for all programming languages {{{
 "
 autocmd FileType javascript nnoremap <buffer> <localleader>c I//<ESC>
 autocmd FileType python     nnoremap <buffer> <localleader>c I#<ESC>
-
-
+"
+" }}}
 " [JAVASCRIPT] - javascript file settings {{{
 "
 "
@@ -407,40 +412,38 @@ augroup END
 "
 " }}}
 
-
-
-
-"#############################################
-" original stuff
-"#############################################
-
-
-set diffexpr=MyDiff()
-function! MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      if empty(&shellxquote)
-        let l:shxq_sav = ''
-        set shellxquote&
+" [DIFF] - make it run on Windows systems {{{
+"
+if s:is_windows
+    set diffexpr=MyDiff()
+    function! MyDiff()
+      let opt = '-a --binary '
+      if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+      if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+      let arg1 = v:fname_in
+      if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+      let arg2 = v:fname_new
+      if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+      let arg3 = v:fname_out
+      if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+      if $VIMRUNTIME =~ ' '
+        if &sh =~ '\<cmd'
+          if empty(&shellxquote)
+            let l:shxq_sav = ''
+            set shellxquote&
+          endif
+          let cmd = '"' . $VIMRUNTIME . '\diff"'
+        else
+          let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+        endif
+      else
+        let cmd = $VIMRUNTIME . '\diff'
       endif
-      let cmd = '"' . $VIMRUNTIME . '\diff"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-  if exists('l:shxq_sav')
-    let &shellxquote=l:shxq_sav
-  endif
-endfunction
+      silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+      if exists('l:shxq_sav')
+        let &shellxquote=l:shxq_sav
+      endif
+    endfunction
+endif
+"
+" }}}
