@@ -79,3 +79,6 @@ echo "" >> $sTmuxConfigPath
 echo "# Initialize tmux plugin manager" >> $sTmuxConfigPath
 echo "run '$sPluginBasePath/tpm/tpm'" >> $sTmuxConfigPath
 
+# source tmux configuration file
+tmux source-file $sTmuxConfigPath
+
