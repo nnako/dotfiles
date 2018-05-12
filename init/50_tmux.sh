@@ -1,4 +1,7 @@
-# path settings
+#
+# settings
+#
+
 sPluginBasePath=$HOME/.tmux/plugins
 sTmuxConfigPath=$HOME/.tmux.conf
 
@@ -6,7 +9,7 @@ sTmuxConfigPath=$HOME/.tmux.conf
 
 
 #
-## get plugins
+# set plugins to be installed
 #
 
 e_header "Installing and Configuring Tmux Plugins"
@@ -25,7 +28,20 @@ for item in "${lstPluginUrl[@]}"; do
     lstPluginName=(${lstPluginName[@]} "${sPluginName%%.*}")
 done
 
-# determine names of installed plugins if plugin folder already exists
+
+
+
+#
+# determine plugins not yet installed
+#
+
+# CAUTION
+# a subsequent run of this block will clear all existing plugins from the
+# configuration file so that none of the existing plugins will be re-installed.
+# in order to re-install any plugin, you have to remove the specific plugin
+# folder from the ~/.tmux/plugins directory. no already existing plugins will
+# be installed.
+
 if [[ -d $sPluginBasePath ]]; then
 
     # get path of plugins which have already been installed
@@ -45,7 +61,13 @@ if [[ -d $sPluginBasePath ]]; then
 
 fi
 
+
+
+
+#
 # create configuration file
+#
+
 echo '# List of plugins' > $sTmuxConfigPath
 
 # using each plugin name...
@@ -79,6 +101,12 @@ echo "" >> $sTmuxConfigPath
 echo "# Initialize tmux plugin manager" >> $sTmuxConfigPath
 echo "run '$sPluginBasePath/tpm/tpm'" >> $sTmuxConfigPath
 
+
+
+
+#
 # source tmux configuration file
+#
+
 tmux source-file $sTmuxConfigPath
 
