@@ -71,6 +71,7 @@ pip install pyzmail
 pip install pyocclient
 pip install argparse
 pip install configparser
+pip install markdown
 
 
 
