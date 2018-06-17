@@ -61,7 +61,7 @@ sudo apt-get -qq install imagemagick  # for operations on bitmap graphics
 sudo apt-get -qq install pdftk        # for operations on PDF files
 
 # automation of console
-sudo apt-get -qq install expect       # for automation of interactive console
+#sudo apt-get -qq install expect       # for automation of interactive console
 
 
 
@@ -75,6 +75,7 @@ pip install pyocclient
 pip install argparse
 pip install configparser
 pip install markdown
+pip install pexpect
 
 
 
