@@ -14,7 +14,21 @@ sPythonBaseDir=/opt      # base folder name fo install python versions
 
 
 
+#
+# FIX problem with lsb_release by renaming file
+#
+
+if [[ -d /usr/bin/lsb_release ]]; then
+    sudo mv /usr/bin/lsb_release /usr/bin/x_lsb_release
+fi
+
+
+
+
+#
 # leave virtual environment if possible
+#
+
 #...
 
 
@@ -24,7 +38,7 @@ sPythonBaseDir=/opt      # base folder name fo install python versions
 ## install python version v2 from source
 #
 
-if [[ ! -d $sPythonBaseDir/$sPython2name ]]; then
+#if [[ ! -d $sPythonBaseDir/$sPython2name ]]; then
 
     e_header "... Python v${vPython2} from source into ${sPythonBaseDir}"
 
@@ -39,7 +53,7 @@ if [[ ! -d $sPythonBaseDir/$sPython2name ]]; then
     make
     sudo make install
 
-fi
+#fi
 
 
 
@@ -104,11 +118,11 @@ sudo pip -qq install virtualenvwrapper
 source ~/.profile
 
 # ENV for python v2 and update pip
-if [[ ! -d $HOME/.virtualenvs/${sPython2venv} ]]; then
+#if [[ ! -d $HOME/.virtualenvs/${sPython2venv} ]]; then
     mkvirtualenv ${sPython2venv} -p ${sPythonBaseDir}/${sPython2name}/bin/${sPython2name}
     sudo pip install -IU pip
     deactivate
-fi
+#fi
 
 # ENV for python v3 and update pip
 if [[ ! -d $HOME/.virtualenvs/${sPython3venv} ]]; then
