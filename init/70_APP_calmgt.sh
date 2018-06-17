@@ -65,12 +65,16 @@ sudo apt-get -qq install sendemail   # to be able to send emails from within CRO
 
 # EXCEL read
 pip install xlrd
+pip install openpyxl
 
 # OWNCLOUD client
 pip install pyocclient
 
 # INI file management
 pip install configparser
+
+# GUI management
+pip install easygui
 
 
 
