@@ -3,7 +3,7 @@
 #
 
 # python versions
-vPython2=2.7.10          # version number for python v2
+vPython2=2.7.14          # version number for python v2
 sPython2name=python2.7   # name of python v2 installation
 sPython2venv=python27    # name of python v2 virtual environment
 vPython3=3.4.2           # version number for python v3
@@ -18,7 +18,7 @@ sPythonBaseDir=/opt      # base folder name fo install python versions
 # leave virtual environment if possible
 #
 
-#...
+deactivate
 
 
 
@@ -27,7 +27,7 @@ sPythonBaseDir=/opt      # base folder name fo install python versions
 ## install python version v2 from source
 #
 
-#if [[ ! -d $sPythonBaseDir/$sPython2name ]]; then
+if [[ ! -d $sPythonBaseDir/$sPython2name ]]; then
 
     e_header "... Python v${vPython2} from source into ${sPythonBaseDir}"
 
@@ -42,7 +42,7 @@ sPythonBaseDir=/opt      # base folder name fo install python versions
     make
     sudo make install
 
-#fi
+fi
 
 
 
@@ -123,11 +123,11 @@ sudo pip -qq install virtualenvwrapper
 source ~/.profile
 
 # ENV for python v2 and update pip
-#if [[ ! -d $HOME/.virtualenvs/${sPython2venv} ]]; then
+if [[ ! -d $HOME/.virtualenvs/${sPython2venv} ]]; then
     mkvirtualenv ${sPython2venv} -p ${sPythonBaseDir}/${sPython2name}/bin/${sPython2name}
     sudo pip install -IU pip
     deactivate
-#fi
+fi
 
 # ENV for python v3 and update pip
 if [[ ! -d $HOME/.virtualenvs/${sPython3venv} ]]; then
