@@ -15,17 +15,6 @@ sPythonBaseDir=/opt      # base folder name fo install python versions
 
 
 #
-# FIX problem with lsb_release by renaming file
-#
-
-if [[ -d /usr/bin/lsb_release ]]; then
-    sudo mv /usr/bin/lsb_release /usr/bin/x_lsb_release
-fi
-
-
-
-
-#
 # leave virtual environment if possible
 #
 
@@ -99,6 +88,22 @@ if [[ ! "$(type -P ${sModuleName})" ]]; then
   e_header "Installing " ${sModuleName}
   sudo apt-get -qq install ${sModuleName} -y
   sudo easy_install pip
+fi
+
+
+
+
+#
+# FIX problem with pip and lsb_release by renaming file
+#
+
+# somehow pip has a problem when lsb_release is installed
+# so, removing or renaming the file should solve the problem
+# it can be re-activated by re-renaming or by re-installing
+# "using apt-get install lsb-core"
+
+if [[ -d /usr/bin/lsb_release ]]; then
+    sudo mv /usr/bin/lsb_release /usr/bin/x_lsb_release
 fi
 
 
