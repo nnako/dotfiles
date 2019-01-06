@@ -54,6 +54,7 @@ sudo sed -i "s/#\sfastcgi_pass unix/fastcgi_pass unix/g" /etc/nginx/sites-availa
 
 # add fast cgi path info
 sudo sed -i "/#location ~ \\\.php\\$/a fastcgi_split_path_info ^(.+\\\.php)(\/.+)\\$;" /etc/nginx/sites-available/default
+sudo sed -i "/fastcgi_pass unix/a }" /etc/nginx/sites-available/default
 sudo sed -i "/fastcgi_pass unix/a fastcgi_index index.php;" /etc/nginx/sites-available/default
 sudo sed -i "/fastcgi_pass unix/a include fastcgi.conf;" /etc/nginx/sites-available/default
 

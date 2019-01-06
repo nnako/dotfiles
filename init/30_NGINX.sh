@@ -36,6 +36,7 @@ fi
 
 # prevent PRi from overload
 sudo sed -i "s/worker_processes 4;/worker_processes 1;/g" /etc/nginx/nginx.conf
+sudo sed -i "s/worker_processes auto;/worker_processes 1;/g" /etc/nginx/nginx.conf
 sudo sed -i "s/worker_connections 768;/worker_connections 128;/g" /etc/nginx/nginx.conf
 
 # start NGINX service
