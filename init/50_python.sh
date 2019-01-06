@@ -3,12 +3,12 @@
 #
 
 # python versions
-vPython2=2.7.14          # version number for python v2
+vPython2=2.7.15          # version number for python v2
 sPython2name=python2.7   # name of python v2 installation
 sPython2venv=python27    # name of python v2 virtual environment
-vPython3=3.4.2           # version number for python v3
-sPython3name=python3.4   # name of python v3 installation
-sPython3venv=python34    # name of python v3 virtual environment
+vPython3=3.7.2           # version number for python v3
+sPython3name=python3.7   # name of python v3 installation
+sPython3venv=python37    # name of python v3 virtual environment
 sPythonBaseDir=/opt      # base folder name fo install python versions
 
 
