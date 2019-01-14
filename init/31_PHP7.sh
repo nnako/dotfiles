@@ -15,13 +15,20 @@ is_raspbian || return 1
 packages=(
   php7.0
   php7.0-cli
+  php7.0-curl
   php7.0-fpm
   php7.0-gd
-  php7.0-curl
-  php7.0-xml
-  php7.0-zip
-  php7.0-opcache
+  php7.0-hash
+  php7.0-json
   php7.0-mbstring
+  php7.0-mcrypt
+  php7.0-mysqli
+  php7.0-opcache
+  php7.0-recode
+  php7.0-xml
+  php7.0-xmlprc
+  php7.0-zip
+  php7.0-zlib
 )
 
 # filter packages which have already been installed
