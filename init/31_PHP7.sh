@@ -52,18 +52,21 @@ fi
 # create backup of default site
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default-do-not-touch
 
+# create PHP test site
+echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/index.php
+
 # add index.php to default index files
-sudo sed -i "s/index index.html/index index.php index.html;/g" /etc/nginx/sites-available/default
+sudo sed -i -r 's|index index\.html|index index\.php index\.html|g' /etc/nginx/sites-available/default
 
 # uncomment fast cgi blocks
-sudo sed -i "s/#location ~ \\\.php\\$/location ~ \\\.phpi\\$/g" /etc/nginx/sites-available/default
-sudo sed -i "s/#\sfastcgi_pass unix/fastcgi_pass unix/g" /etc/nginx/sites-available/default
+sudo sed -i -r 's|#location ~ \\.php\$|location ~ \\.php\$|g' /etc/nginx/sites-available/default
+sudo sed -i -r 's|#\sfastcgi_pass unix|fastcgi_pass unix|g' /etc/nginx/sites-available/default
 
 # add fast cgi path info
-sudo sed -i "/#location ~ \\\.php\\$/a fastcgi_split_path_info ^(.+\\\.php)(\/.+)\\$;" /etc/nginx/sites-available/default
-sudo sed -i "/fastcgi_pass unix/a }" /etc/nginx/sites-available/default
-sudo sed -i "/fastcgi_pass unix/a fastcgi_index index.php;" /etc/nginx/sites-available/default
-sudo sed -i "/fastcgi_pass unix/a include fastcgi.conf;" /etc/nginx/sites-available/default
+sudo sed -i -r '/location ~ \\.php\$/a fastcgi_split_path_info \^\(\.\+\\.php\)(\/\.\+\)\$;' /etc/nginx/sites-available/default
+sudo sed -i -r '/fastcgi_pass unix/a }' /etc/nginx/sites-available/default
+sudo sed -i -r '/fastcgi_pass unix/a fastcgi_index index\.php;' /etc/nginx/sites-available/default
+sudo sed -i -r '/fastcgi_pass unix/a include fastcgi\.conf;' /etc/nginx/sites-available/default
 
 
 
