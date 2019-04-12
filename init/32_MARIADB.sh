@@ -27,13 +27,3 @@ if (( ${#packages[@]} > 0 )); then
     sudo apt-get -qq install "$package"
   done
 fi
-
-
-
-
-#
-## set some configutations
-#
-
-# secure the database
-sudo mysql_secure_installation

@@ -1,5 +1,5 @@
 #
-## check for execution permission
+# check for execution permission
 #
 
 is_raspbian || return 1
@@ -8,7 +8,7 @@ is_raspbian || return 1
 
 
 #
-## install necessary packages
+# install necessary packages
 #
 
 # define packages
@@ -26,18 +26,3 @@ if (( ${#packages[@]} > 0 )); then
     sudo apt-get -qq install "$package"
   done
 fi
-
-
-
-
-#
-## set some configutations
-#
-
-# prevent PRi from overload
-sudo sed -i "s/worker_processes 4;/worker_processes 1;/g" /etc/nginx/nginx.conf
-sudo sed -i "s/worker_processes auto;/worker_processes 1;/g" /etc/nginx/nginx.conf
-sudo sed -i "s/worker_connections 768;/worker_connections 128;/g" /etc/nginx/nginx.conf
-
-# start NGINX service
-sudo /etc/init.d/nginx start

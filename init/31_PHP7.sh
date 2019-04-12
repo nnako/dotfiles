@@ -1,5 +1,5 @@
 #
-## check for execution permission
+# check for execution permission
 #
 
 is_raspbian || return 1
@@ -8,7 +8,7 @@ is_raspbian || return 1
 
 
 #
-## install necessary packages
+# install necessary packages
 #
 
 # define packages
@@ -41,39 +41,3 @@ if (( ${#packages[@]} > 0 )); then
     sudo apt-get -qq install "$package"
   done
 fi
-
-
-
-
-#
-## set some configutations
-#
-
-# create backup of default site
-sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default-do-not-touch
-
-# create PHP test site
-echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/index.php
-
-# add index.php to default index files
-sudo sed -i -r 's|index index\.html|index index\.php index\.html|g' /etc/nginx/sites-available/default
-
-# uncomment fast cgi blocks
-sudo sed -i -r 's|#location ~ \\.php\$|location ~ \\.php\$|g' /etc/nginx/sites-available/default
-sudo sed -i -r 's|#\sfastcgi_pass unix|fastcgi_pass unix|g' /etc/nginx/sites-available/default
-
-# add fast cgi path info
-sudo sed -i -r '/location ~ \\.php\$/a fastcgi_split_path_info \^\(\.\+\\.php\)(\/\.\+\)\$;' /etc/nginx/sites-available/default
-sudo sed -i -r '/fastcgi_pass unix/a }' /etc/nginx/sites-available/default
-sudo sed -i -r '/fastcgi_pass unix/a fastcgi_index index\.php;' /etc/nginx/sites-available/default
-sudo sed -i -r '/fastcgi_pass unix/a include fastcgi\.conf;' /etc/nginx/sites-available/default
-
-
-
-
-#
-# restart
-#
-
-sudo /etc/init.d/nginx restart
-sudo /etc/init.d/php7.0-fpm restart
