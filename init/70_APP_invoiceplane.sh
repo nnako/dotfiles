@@ -49,7 +49,7 @@ sudo sed -i -r '/fastcgi_pass unix/a }' /etc/nginx/sites-available/default
 sudo sed -i -r '/fastcgi_pass unix/a fastcgi_index index\.php;' /etc/nginx/sites-available/default
 sudo sed -i -r '/fastcgi_pass unix/a include fastcgi\.conf;' /etc/nginx/sites-available/default
 
-# restart
+# restart services
 sudo /etc/init.d/nginx restart
 sudo /etc/init.d/php7.0-fpm restart
 
@@ -72,20 +72,17 @@ sudo mysql_secure_installation
 #
 
 # get project source code (if not already present)
-if [[ ! -d "$HOME/$prjname" ]]; then
-    git clone $prjpath $HOME/$prjname
-fi
+#if [[ ! -d "$HOME/$prjname" ]]; then
+    #git clone $prjpath $HOME/$prjname
+#fi
 
 # move into project folder
-cd $HOME/$prjname
-
-# prepare executable application (neccessity of click module)
-#pip install --editable .
+#cd $HOME/$prjname
 
 # create temporary project folder (if not existent)
-if [[ ! -d "$HOME/.$prjname" ]]; then
-    mkdir $HOME/.$prjname
-fi
+#if [[ ! -d "$HOME/.$prjname" ]]; then
+    #mkdir $HOME/.$prjname
+#fi
 
 
 
