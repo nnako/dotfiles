@@ -1,5 +1,5 @@
 #
-## check for execution permission
+# check for execution permission
 #
 
 is_raspbian || return 1
@@ -8,7 +8,7 @@ is_raspbian || return 1
 
 
 #
-## install necessary packages
+# install necessary packages
 #
 
 # define packages
@@ -27,3 +27,13 @@ if (( ${#packages[@]} > 0 )); then
     sudo apt-get -qq install "$package"
   done
 fi
+
+
+
+
+#
+# secure the database
+#
+
+sudo mysql_secure_installation
+

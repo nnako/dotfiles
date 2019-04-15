@@ -2,11 +2,14 @@
 # set source code path settings
 #
 
-prjname="APP__invoiceplane"
-prjpath="pi@192.168.1.49:/home/pi/usbdrv/_python/$prjname.git"
+prjname="invoiceplane"
+prjpath="pi@192.168.1.49:/home/pi/usbdrv/_python/APP__$prjname.git"
+current_ip=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1 -d'/')
 
-# move into Python v2 virtual environment
-#workon $sPython2venv
+sitepath="/etc/nginx/sites-available"
+enablepath="/etc/nginx/sites-enabled"
+wwwpath="/var/www/invoiceplane"
+wwwuser="www-data"
 
 
 
@@ -14,6 +17,9 @@ prjpath="pi@192.168.1.49:/home/pi/usbdrv/_python/$prjname.git"
 #
 # configure NGINX
 #
+
+# shut down any other web service
+sudo service apache2 stop
 
 # prevent PRi from overload
 sudo sed -i "s/worker_processes 4;/worker_processes 1;/g" /etc/nginx/nginx.conf
@@ -57,12 +63,26 @@ sudo /etc/init.d/php7.0-fpm restart
 
 
 #
-# configure MARIABD
+# configure MARIADB
 #
 
 # secure the database
-sudo mysql_secure_installation
+#sudo mysql_secure_installation
 
+# login to database system
+#...
+
+# create database
+#...
+
+# create user
+#...
+
+# grant full access to user
+#...
+
+# save and exit
+#...
 
 
 
@@ -71,33 +91,53 @@ sudo mysql_secure_installation
 # get and prepare application
 #
 
-# get project source code (if not already present)
-#if [[ ! -d "$HOME/$prjname" ]]; then
-    #git clone $prjpath $HOME/$prjname
-#fi
+# download zip file from project site
+wget -c -O v1.5.9.zip https://invoiceplane.com/download/v1.5.9
 
-# move into project folder
-#cd $HOME/$prjname
+# unzip into local temporary folder
+unzip v1.5.9
 
-# create temporary project folder (if not existent)
-#if [[ ! -d "$HOME/.$prjname" ]]; then
-    #mkdir $HOME/.$prjname
-#fi
+# move unzipped files into web folder
+sudo mv ip $wwwpath
 
+# rename a couple of commands
+cd $wwwpath
+sudo cp ipconfig.php.example ipconfig.php
+sudo cp htaccess .htaccess
 
+# insert IP into applications ip configuration
+sudo sed -i -r "s|IP_URL=.*|IP_URL=http://$current_ip|g" $wwwpath/ipconfig.php
 
+# provide necessary permissions
+sudo chown -R $wwwuser:$wwwuser $wwwpath/
+sudo chmod -R 755 $wwwpath/
 
-#
-# get relevant packages (if not already present)
-#
+# create NGINX site configuration
+cat >$sitepath/$prjname <<EOF
+server {
+    listen 80;
+    listen [::]:80;
+    root /var/www/$prjname;
+    index index.php index.html index.htm;
+    server_name $current_ip;
+    client_max_body_size 100M;
 
-#sudo apt-get -qq install python-pip
-#sudo apt-get -qq install python-dev
-#sudo apt-get -qq install libxml2-dev
-#sudo apt-get -qq install libxslt1-dev
-#sudo apt-get -qq install zlib1g-dev
-#sudo apt-get -qq install libffi-dev
-#sudo apt-get -qq install libyaml-dev
-#sudo apt-get -qq install libssl-dev
-#sudo apt-get -qq install libsasl2-dev
-#sudo apt-get -qq install libldap2-dev
+    location / {
+        try_files \$uri \$uri/ /index.php?q=\$uri\$args;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+        include fastcgi_params;
+    }
+}
+EOF
+
+# disable all other possible sites
+sudo rm $enablepath/.
+
+# enable site
+sudo ln -s $sitepath/$prjname $enablepath/
+
