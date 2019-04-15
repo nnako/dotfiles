@@ -72,17 +72,16 @@ sudo /etc/init.d/php7.0-fpm restart
 # login to database system
 #...
 
-# create database
-#...
-
-# create user
-#...
-
-# grant full access to user
-#...
-
-# save and exit
-#...
+# create and configure database and user
+sudo mariadb<<EOFDB
+CREATE DATABASE $prjname;
+CREATE USER 'invoiceplaneuser'@'localhost' IDENTIFIED BY 'secret-password';
+GRANT ALL ON $prjname.* TO 'invoiceplaneuser'@'localhost' IDENTIFIED BY 'secret-password' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EOFDB
+mysql dbnane<<EOFMYSQL
+SELECT * from table;
+EOFMYSQL
 
 
 
@@ -140,4 +139,7 @@ sudo rm $enablepath/.
 
 # enable site
 sudo ln -s $sitepath/$prjname $enablepath/
+
+# restart nginx service
+sudo systemctl restart nginx.service
 
