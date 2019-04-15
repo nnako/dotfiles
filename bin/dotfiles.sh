@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 [[ "$1" == "source" ]] || \
 
 echo 'Dotfiles - nnako'
@@ -18,19 +19,26 @@ exit; fi
 
 
 #
-## define general purpose vars and functions
+# define base operation folder
 #
 
 # Where the magic happens.
 export DOTFILES=~/.dotfiles
 
-# Logging stuff.
+
+
+
+#
+# function definitions
+#
+
+# logging
 function e_header()   { echo -e "\n\033[1m$@\033[0m"; }
 function e_success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
 function e_error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
 function e_arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
 
-# For testing.
+# testing
 function assert() {
   local success modes equals actual expected
   modes=(e_error e_success); equals=("!=" "=="); expected="$1"; shift
@@ -55,11 +63,7 @@ function get_os() {
   done
 }
 
-
-
-
-#
-## Remove an entry from $PATH
+# remove an entry from PATH
 # Based on http://stackoverflow.com/a/2108540/142339
 function path_remove() {
   local arg path
@@ -74,8 +78,11 @@ function path_remove() {
 
 
 #
-## display a fancy multi-select menu.
+# display multi-select menu
+#
+
 # Inspired by http://serverfault.com/a/298312
+
 function prompt_menu() {
   local exitcode prompt choices nums i n
   exitcode=0
