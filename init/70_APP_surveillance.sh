@@ -45,6 +45,7 @@ fi
 packages=(
     python-picamera
     python3-picamera
+    libjpeg-dev
     libjpeg62-dev
     zlib1g-dev
     libfreetype6-dev
