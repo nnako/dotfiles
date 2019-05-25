@@ -38,9 +38,17 @@ fi
 # get and install relevant packages (if not already present)
 #
 
+# HINT
+#  -> use python3-picamera if running on Python v3
+
 # define packages
 packages=(
-  python-picamera
+    python-picamera
+    python3-picamera
+    libjpeg62-dev
+    zlib1g-dev
+    libfreetype6-dev
+    liblcms1-dev
 )
 
 # filter packages which have already been installed
@@ -53,6 +61,16 @@ if (( ${#packages[@]} > 0 )); then
     sudo apt-get -qq install "$package"
   done
 fi
+
+
+
+
+
+#
+# install PIL
+#
+
+pip install pillow
 
 
 
