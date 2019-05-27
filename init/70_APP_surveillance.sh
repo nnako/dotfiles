@@ -38,8 +38,10 @@ fi
 # get and install relevant packages (if not already present)
 #
 
-# HINT
-#  -> use python3-picamera if running on Python v3
+# used applications
+#  -> picamera   Application and Python module for camera access
+#  -> pillow     Python module for image manipulation
+#  -> sendemail  CLI Application for transmission of emails
 
 # define packages
 packages=(
@@ -50,6 +52,9 @@ packages=(
     zlib1g-dev
     libfreetype6-dev
     liblcms1-dev
+    sendemail
+    libio-socket-ssl-perl
+    libnet-ssleay-perl
 )
 
 # filter packages which have already been installed
