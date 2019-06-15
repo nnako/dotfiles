@@ -31,6 +31,7 @@ set folder="~/Mail"
 set record="~/Mail/Sent"
 set postponed="~/Mail/Drafts"
 set mbox_type=Maildir
+set from = "<from-address>"
 
 
 
@@ -157,6 +158,10 @@ account default: prive
 
 EOF
 
+# restrict access
+sudo chmod g-r ${FILEPATH}
+sudo chmod o-r ${FILEPATH}
+
 # create executable files in local bin folder
 mkdir ~/bin
 cp /usr/share/doc/msmtp/examples/msmtpqueue/msmtp-enqueue.sh ~/bin/
@@ -170,15 +175,16 @@ cp /usr/share/doc/msmtp/examples/msmtpqueue/msmtp-runqueue.sh ~/bin/
 #
 
 # install network manager
-sudo apt install network-manager network-manager-gnome openvpn \
-openvpn-systemd-resolved network-manager-openvpn \
-network-manager-openvpn-gnome
+sudo apt-get install network-manager
+#sudo apt install network-manager network-manager-gnome openvpn \
+#openvpn-systemd-resolved network-manager-openvpn \
+#network-manager-openvpn-gnome
 
 # remove unnecessary packages
-sudo apt purge openresolv dhcpcd5
+#sudo apt purge openresolv dhcpcd5
 
 # replace with symlink
-sudo ln -sf /lib/systemd/resolv.conf /etc/resolv.conf
+#sudo ln -sf /lib/systemd/resolv.conf /etc/resolv.conf
 
 # create script
 FILEPATH=~/bin/checkmail.sh
@@ -187,7 +193,7 @@ cat > ${FILEPATH} <<EOF
 
 STATE=`nmcli networking connectivity`
 
-if [ $STATE = 'full' ]
+if [ $STATE = 'vollständig' ]
 then
     ~/bin/msmtp-runqueue.sh
     offlineimap
