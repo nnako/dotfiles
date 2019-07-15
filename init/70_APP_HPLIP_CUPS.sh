@@ -55,7 +55,7 @@ mv scan.pdf ~/NEXTCLOUD/_scan/
 EOF
 sudo chmod a+x ${FILEPATH}
 
-# FLAT A4 BW 200dpi
+# FLAT A4 PORTRAIT BW 200dpi
 FILEPATH=/home/pi/scan_flat_A4_200dpi_bw.sh
 cat > ${FILEPATH} <<EOF
 #
@@ -117,7 +117,7 @@ fi
 EOF
 sudo chmod a+x ${FILEPATH}
 
-# FLAT A5 BW 200dpi
+# FLAT A5 PORTRAIT BW 200dpi
 FILEPATH=/home/pi/scan_flat_A5_200dpi_bw.sh
 cat > ${FILEPATH} <<EOF
 #
@@ -164,6 +164,195 @@ else
 
     # scan original
     scanimage --mode=Lineart --resolution=200 -x 148 -y 210 >/home/pi/scan.pnm
+
+    # convert to PNG
+    convert scan.pnm scan.png
+    rm scan.pnm
+
+    # convert to PDF
+    convert scan.png $filename.pdf
+    rm scan.png
+
+    # move into nextcloud
+    mv $filename.pdf ~/NEXTCLOUD/_scan/
+
+fi
+EOF
+sudo chmod a+x ${FILEPATH}
+
+# FLAT A5 LANDSCAPE BW 200dpi
+FILEPATH=/home/pi/scan_flat_A5L_200dpi_bw.sh
+cat > ${FILEPATH} <<EOF
+#
+# get user's wish of document name
+#
+
+if [[ $# -ge 2 ]]; then
+    filename=$2
+else
+    filename=scan
+fi
+
+
+
+
+#
+# get user's wish of number of pages
+#
+
+if [[ $# -ge 1 ]]; then
+
+    for (( i=1; i<=$1; i++ )); do
+
+        # wait for user to place the document
+        read -p "PLEASE PUT PAGE#$i ONTO THE FLATBED" -n1
+
+        # scan original
+        scanimage --mode=Lineart --resolution=200 -x 210 -y 148 >/home/pi/scan_$i.pnm
+
+    done
+
+    # convert to PNG
+    convert scan_*.pnm scan_*.png
+    rm scan_*.pnm
+
+    # convert to PDF
+    convert scan_*.png $filename.pdf
+    rm scan_*.png
+
+    # move into nextcloud
+    mv $filename.pdf ~/NEXTCLOUD/_scan/
+
+else
+
+    # scan original
+    scanimage --mode=Lineart --resolution=200 -x 210 -y 148 >/home/pi/scan.pnm
+
+    # convert to PNG
+    convert scan.pnm scan.png
+    rm scan.pnm
+
+    # convert to PDF
+    convert scan.png $filename.pdf
+    rm scan.png
+
+    # move into nextcloud
+    mv $filename.pdf ~/NEXTCLOUD/_scan/
+
+fi
+EOF
+sudo chmod a+x ${FILEPATH}
+
+# FLAT A6 PORTRAIT BW 200dpi
+FILEPATH=/home/pi/scan_flat_A6_200dpi_bw.sh
+cat > ${FILEPATH} <<EOF
+#
+# get user's wish of document name
+#
+
+if [[ $# -ge 2 ]]; then
+    filename=$2
+else
+    filename=scan
+fi
+
+
+
+
+#
+# get user's wish of number of pages
+#
+
+if [[ $# -ge 1 ]]; then
+
+    for (( i=1; i<=$1; i++ )); do
+
+        # wait for user to place the document
+        read -p "PLEASE PUT PAGE#$i ONTO THE FLATBED" -n1
+
+        # scan original
+        scanimage --mode=Lineart --resolution=200 -x 105 -y 148 >/home/pi/scan_$i.pnm
+
+    done
+
+    # convert to PNG
+    convert scan_*.pnm scan_*.png
+    rm scan_*.pnm
+
+    # convert to PDF
+    convert scan_*.png $filename.pdf
+    rm scan_*.png
+
+    # move into nextcloud
+    mv $filename.pdf ~/NEXTCLOUD/_scan/
+
+else
+
+    # scan original
+    scanimage --mode=Lineart --resolution=200 -x 105 -y 148 >/home/pi/scan.pnm
+
+    # convert to PNG
+    convert scan.pnm scan.png
+    rm scan.pnm
+
+    # convert to PDF
+    convert scan.png $filename.pdf
+    rm scan.png
+
+    # move into nextcloud
+    mv $filename.pdf ~/NEXTCLOUD/_scan/
+
+fi
+EOF
+sudo chmod a+x ${FILEPATH}
+
+# FLAT A6 LANDSCAPE BW 200dpi
+FILEPATH=/home/pi/scan_flat_A6L_200dpi_bw.sh
+cat > ${FILEPATH} <<EOF
+#
+# get user's wish of document name
+#
+
+if [[ $# -ge 2 ]]; then
+    filename=$2
+else
+    filename=scan
+fi
+
+
+
+
+#
+# get user's wish of number of pages
+#
+
+if [[ $# -ge 1 ]]; then
+
+    for (( i=1; i<=$1; i++ )); do
+
+        # wait for user to place the document
+        read -p "PLEASE PUT PAGE#$i ONTO THE FLATBED" -n1
+
+        # scan original
+        scanimage --mode=Lineart --resolution=200 -x 148 -y 105 >/home/pi/scan_$i.pnm
+
+    done
+
+    # convert to PNG
+    convert scan_*.pnm scan_*.png
+    rm scan_*.pnm
+
+    # convert to PDF
+    convert scan_*.png $filename.pdf
+    rm scan_*.png
+
+    # move into nextcloud
+    mv $filename.pdf ~/NEXTCLOUD/_scan/
+
+else
+
+    # scan original
+    scanimage --mode=Lineart --resolution=200 -x 148 -y 105 >/home/pi/scan.pnm
 
     # convert to PNG
     convert scan.pnm scan.png
