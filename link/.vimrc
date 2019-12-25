@@ -177,6 +177,13 @@ let mapleader = ","
 let localleader = "\\"
 "
 " }}}
+" [ all ]  <CTRL> + <N>  =>  stop highlighting {{{
+"
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> <Esc>:nohl<CR>
+inoremap <C-n> <Esc>:nohl<CR>
+"
+" }}}
 " [NORMAL] change tab {{{
 "
 map <Leader>n <ESC>:tabprevious<CR>
@@ -252,13 +259,6 @@ vnoremap <left> <Nop>
 vnoremap <right> <Nop>
 "
 " }}}
-" [ all ]  <CTRL> + <N>  =>  stop highlighting {{{
-"
-noremap <C-n> :nohl<CR>
-vnoremap <C-n> <Esc>:nohl<CR>
-inoremap <C-n> <Esc>:nohl<CR>
-"
-" }}}
 " [NORMAL] <CTRL> + <movement>  =>  move around existing split windows {{{
 "
 map <c-j> <c-w>j
@@ -291,6 +291,33 @@ nnoremap H ^
 " [NORMAL] goto text end in line using <SHIFT> + <L> {{{
 "
 nnoremap L g_
+"
+" }}}
+" [NORMAL] create new tab using <SHIFT> + <T> {{{
+"
+nnoremap <C-t> :tabnew<CR>
+"
+" }}}
+" [NORMAL] show previous / next in quicklist using <LEFT> and <RIGHT> {{{
+"
+nnoremap <Left> :cp<CR>
+nnoremap <Right> :cn<CR>
+"
+" }}}
+" [NORMAL] continue ordered list using <LEADER> + <CR> {{{
+"
+nnoremap <Leader><CR> yyp<C-a>elC<SPACE><SPACE><ESC>
+inoremap <Leader><CR> <ESC>yyp<C-a>elC<SPACE>
+"
+" }}}
+" [NORMAL] sudo write for current file using command W {{{
+"
+nnoremap :W :w !sudo tee %
+"
+" }}}
+" [NORMAL] jump between brace pairs using <TAB> {{{
+"
+nnoremap <TAB> %
 "
 " }}}
 
