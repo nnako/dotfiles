@@ -30,12 +30,6 @@ execute pathogen#infect()
 "execute pathogen#helptags()
 "
 " }}}
-" AIRLINE plugin {{{
-"
-"let g:airline_powerline_fonts = 1
-set laststatus=2 " show controls even without further splits
-"
-" }}}
 " VIEW settings {{{
 "
 
@@ -141,6 +135,12 @@ set undodir=c:\WINDOWS\Temp
 "#############################################
 
 
+" AIRLINE     -> show controls even without further splits {{{
+"
+"let g:airline_powerline_fonts = 1
+set laststatus=2 " show controls even without further splits
+"
+" }}}
 " PYTHON-MODE -> deactivate lookups for rope display {{{
 "
 let g:pymode_rope_lookup_project = 0
@@ -175,6 +175,13 @@ set sessionoptions-=buffers
 "
 let mapleader = ","
 let localleader = "\\"
+"
+" }}}
+" [ all ]  <CTRL> + <N>  =>  stop highlighting {{{
+"
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> <Esc>:nohl<CR>
+inoremap <C-n> <Esc>:nohl<CR>
 "
 " }}}
 " [NORMAL] change tab {{{
@@ -252,13 +259,6 @@ vnoremap <left> <Nop>
 vnoremap <right> <Nop>
 "
 " }}}
-" [ all ]  <CTRL> + <N>  =>  stop highlighting {{{
-"
-noremap <C-n> :nohl<CR>
-vnoremap <C-n> <Esc>:nohl<CR>
-inoremap <C-n> <Esc>:nohl<CR>
-"
-" }}}
 " [NORMAL] <CTRL> + <movement>  =>  move around existing split windows {{{
 "
 map <c-j> <c-w>j
@@ -271,6 +271,53 @@ map <c-h> <c-w>h
 "
 noremap n nzz
 noremap N Nzz
+"
+" }}}
+" [NORMAL] toggle folding using <SPACE> {{{
+"
+nnoremap <SPACE> za
+"
+" }}}
+" [VISUAL] toggle folding using <SPACE> {{{
+"
+vnoremap <SPACE> za
+"
+" }}}
+" [NORMAL] goto text start in line using <SHIFT> + <H> {{{
+"
+nnoremap H ^
+"
+" }}}
+" [NORMAL] goto text end in line using <SHIFT> + <L> {{{
+"
+nnoremap L g_
+"
+" }}}
+" [NORMAL] create new tab using <SHIFT> + <T> {{{
+"
+nnoremap <C-t> :tabnew<CR>
+"
+" }}}
+" [NORMAL] show previous / next in quicklist using <LEFT> and <RIGHT> {{{
+"
+nnoremap <Left> :cp<CR>
+nnoremap <Right> :cn<CR>
+"
+" }}}
+" [NORMAL] continue ordered list using <LEADER> + <CR> {{{
+"
+nnoremap <Leader><CR> yyp<C-a>elC<SPACE><SPACE><ESC>
+inoremap <Leader><CR> <ESC>yyp<C-a>elC<SPACE>
+"
+" }}}
+" [NORMAL] sudo write for current file using command W {{{
+"
+nnoremap :W :w !sudo tee %
+"
+" }}}
+" [NORMAL] jump between brace pairs using <TAB> {{{
+"
+nnoremap <TAB> %
 "
 " }}}
 
