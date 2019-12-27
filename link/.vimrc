@@ -320,6 +320,14 @@ nnoremap :W :w !sudo tee %
 nnoremap <TAB> %
 "
 " }}}
+" [INSERT] builtin auto-completion using <UP>, <RIGHT>, <DOWN> and <LEFT> {{{
+"
+inoremap <UP> <C-p>
+inoremap <RIGHT> <C-n>
+inoremap <DOWN> <C-n>
+inoremap <LEFT> <C-p>
+"
+" }}}
 
 
 
