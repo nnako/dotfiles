@@ -235,12 +235,10 @@ inoremap jj <Esc>
 inoremap jk <Esc>
 "
 " }}}
-" [NORMAL] use CURSOR KEYS to move text line UP / DOWN {{{
+" [NORMAL] move text line UP / DOWN using <CTRL> + <UP> / <DOWN> {{{
 "
-noremap <down> ddp
-noremap <up> ddkP
-noremap <left> <Nop>
-noremap <right> <Nop>
+noremap <C-down> ddp
+noremap <C-up> ddkP
 "
 " }}}
 " [INSERT] no CURSOR KEYS {{{
@@ -298,10 +296,10 @@ nnoremap L g_
 nnoremap <C-t> :tabnew<CR>
 "
 " }}}
-" [NORMAL] show previous / next in quicklist using <LEFT> and <RIGHT> {{{
+" [NORMAL] show previous / next in quicklist using <UP> and <DOWN> {{{
 "
-nnoremap <Left> :cp<CR>
-nnoremap <Right> :cn<CR>
+nnoremap <Up> :cp<CR>
+nnoremap <Down> :cn<CR>
 "
 " }}}
 " [NORMAL] continue ordered list using <LEADER> + <CR> {{{
