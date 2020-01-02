@@ -50,7 +50,6 @@ set sessionoptions+=resize,winpos
 
 
 " MORE SETTINGS
-"set encoding=utf-8
 set scrolloff=3
 set autoindent
 set showmode
@@ -298,8 +297,8 @@ nnoremap <C-t> :tabnew<CR>
 " }}}
 " [NORMAL] show previous / next in quicklist using <UP> and <DOWN> {{{
 "
-nnoremap <Up> :cp<CR>
-nnoremap <Down> :cn<CR>
+nnoremap <Up> :cp<CR>zz
+nnoremap <Down> :cn<CR>zz
 "
 " }}}
 " [NORMAL] continue ordered list using <LEADER> + <CR> {{{
@@ -425,6 +424,7 @@ autocmd FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on Foc
 autocmd bufwritepost _vimrc source %
 "
 " }}}
+
 
 
 
