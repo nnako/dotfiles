@@ -53,6 +53,8 @@ lstPluginUrl=(
   https://github.com/scrooloose/nerdcommenter.git
   https://github.com/scrooloose/nerdtree.git
   https://github.com/tmhedberg/simpylfold.git
+  https://github.com/wincent/command-t.git
+  https://github.com/ycm-core/YouCompleteMe.git
 )
 #https://github.com/klen/python-mode.git
 
