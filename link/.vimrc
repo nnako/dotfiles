@@ -154,11 +154,18 @@ let g:session_autosave = 'no'
 set sessionoptions-=buffers
 "
 " }}}
-" SIMPLYFOLD  -> settings {{{
+" SIMPYLFOLD  -> settings {{{
 "
 "let g:SimpylFold_docstring_preview = 1
 "let g:SimpylFold_fold_docstring = 0
 "let g:SimpylFold_fold_import = 0
+"
+" }}}
+" ANYFOLD     -> settings {{{
+"
+autocmd FileType * AnyFoldActivate   " activate for ALL filetypes
+"set foldlevel=0  " close all folds
+"set foldlevel=99 " open all folds
 "
 " }}}
 
@@ -323,6 +330,12 @@ inoremap <UP> <C-p>
 inoremap <RIGHT> <C-n>
 inoremap <DOWN> <C-n>
 inoremap <LEFT> <C-p>
+"
+" }}}
+" [NORMAL] reactivate visual block mode using <CTRL> + <V> key {{{
+"
+nnoremap <C-v> <C-v>
+vnoremap <C-v> <C-v>
 "
 " }}}
 
