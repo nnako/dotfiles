@@ -219,6 +219,11 @@ nnoremap <leader>h *<C-O>
 nnoremap <leader>H *<C-O>:execute "vimgrep //gj **/*.*" <Bar> cw<CR>
 "
 " }}}
+" [NORMAL] clear quickfix window to disable jumping around on cursor keys {{{
+"
+nnoremap <leader><C-h> :cw<cr>:cexpr []<cr>:cw<cr>
+"
+" }}}
 " [NORMAL] edit VIMRC in new vertical split {{{
 "
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
