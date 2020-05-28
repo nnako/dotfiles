@@ -3,33 +3,33 @@
 "#############################################
 
 " detect system configuration {{{
-"
-let s:is_windows = has('win32') || has('win64')
-let s:is_nvim = has('nvim')
-"
-" }}}
+    "
+    let s:is_windows = has('win32') || has('win64')
+    let s:is_nvim = has('nvim')
+    "
+    " }}}
 " make vim incompatible to vi (better settings than VI) {{{
-"
-set nocompatible
-"
-" }}}
+    "
+    set nocompatible
+    "
+    " }}}
 " LOAD and EXECUTE EXTERNAL SETTINGS {{{
-"
+    "
 
-" example
-source $VIMRUNTIME/vimrc_example.vim
+    " example
+    source $VIMRUNTIME/vimrc_example.vim
 
-" controls like in WINDOWS operating system
-source $VIMRUNTIME/mswin.vim
-behave mswin
-"
-" }}}
+    " controls like in WINDOWS operating system
+    source $VIMRUNTIME/mswin.vim
+    behave mswin
+    "
+    " }}}
 " PATHOGEN PACKAGE MANAGER {{{
-"
-execute pathogen#infect()
-"execute pathogen#helptags()
-"
-" }}}
+    "
+    execute pathogen#infect()
+    "execute pathogen#helptags()
+    "
+    " }}}
 " VIEW settings {{{
 "
 
@@ -155,19 +155,19 @@ set sessionoptions-=buffers
 "
 " }}}
 " SIMPYLFOLD  -> settings {{{
-"
-"let g:SimpylFold_docstring_preview = 1
-"let g:SimpylFold_fold_docstring = 0
-"let g:SimpylFold_fold_import = 0
-"
-" }}}
+    "
+    "let g:SimpylFold_docstring_preview = 1
+    "let g:SimpylFold_fold_docstring = 0
+    "let g:SimpylFold_fold_import = 0
+    "
+    " }}}
 " ANYFOLD     -> settings {{{
-"
-autocmd FileType * AnyFoldActivate   " activate for ALL filetypes
-"set foldlevel=0  " close all folds
-"set foldlevel=99 " open all folds
-"
-" }}}
+    "
+    autocmd FileType * AnyFoldActivate   " activate for ALL filetypes
+    "set foldlevel=0  " close all folds
+    "set foldlevel=99 " open all folds
+    "
+    " }}}
 
 
 
