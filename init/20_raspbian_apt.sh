@@ -26,9 +26,13 @@ packages=(
   htop
   nmap
   tree
+  feh
+  zathura
+  lynx
   tmux
-  ranger
+  vifm
 )
+  #ranger
 
 # filter packages which have already been installed
 packages=($(setdiff "${packages[*]}" "$(dpkg --get-selections | grep -v deinstall | awk '{print $1}')"))
