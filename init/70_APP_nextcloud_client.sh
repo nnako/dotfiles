@@ -52,8 +52,8 @@ fi
 #sudo make install
 
 # get and install from new location
-git clone https://github.com/nextcloud/desktop.git {$strAppName}_SOURCE
-cd {$strAppName}_SOURCE
+git clone https://github.com/nextcloud/desktop.git ${strAppName}_SOURCE
+cd ${strAppName}_SOURCE
 mkdir build
 cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=~/$strAppName -DCMAKE_BUILD_TYPE=Debug -DNO_SHIBBOLETH=1
