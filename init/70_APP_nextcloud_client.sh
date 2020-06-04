@@ -16,13 +16,23 @@ packages=(
   git
   libsqlite3-dev
   qt5-default
+  openssl
+  libssl-dev
+  libzip-dev
+  qtdeclarative5-dev
+  qtwebengine5-dev
+  qttools5-dev
+  sqlite3
+  libsqlite3-dev
+  libqt5svg5-dev
+  zlib1g-dev
   libqt5webkit5-dev
   qt5keychain-dev
   cmake
   build-essential
   libowncloudsync0
-  libssl1.0-dev
 )
+  #libssl1.0-dev
 
 # filter packages which have already been installed
 packages=($(setdiff "${packages[*]}" "$(dpkg --get-selections | grep -v deinstall | awk '{print $1}')"))
