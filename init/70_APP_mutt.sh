@@ -429,9 +429,9 @@ FILEPATH=~/bin/checkmail.sh
 cat > ${FILEPATH} <<EOF
 #!/bin/sh
 
-STATE=`nmcli networking connectivity`
+STATE=`curl -Is http://www.google.com | head -n 1 | grep "200" | wc -l`
 
-if [ $STATE = 'vollständig' ]
+if [ $STATE = '1' ]
 then
     ~/bin/msmtp-runqueue.sh
     offlineimap
