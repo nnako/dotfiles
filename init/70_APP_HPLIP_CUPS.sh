@@ -444,27 +444,6 @@ fi
 EOF
 sudo chmod a+x ${FILEPATH}
 
-
-
-
-# ADF A4 BW 200dpi DS
-FILEPATH=/home/pi/scan_feed_A4_200dpi_bw_ss.sh
-cat > ${FILEPATH} <<'EOF'
-EOF
-sudo chmod a+x ${FILEPATH}
-
-
-
-
-# ADF A4 BW 200dpi DS
-FILEPATH=/home/pi/scan_feed_A4_200dpi_bw_ss.sh
-cat > ${FILEPATH} <<'EOF'
-EOF
-sudo chmod a+x ${FILEPATH}
-
-
-
-
 # FLAT A5 LANDSCAPE BW 200dpi DARK
 FILEPATH=/home/pi/scan_flat_A5L_200dpi_bw_dark.sh
 cat > ${FILEPATH} <<'EOF'
