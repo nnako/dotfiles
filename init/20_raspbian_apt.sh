@@ -32,6 +32,7 @@ packages=(
   tmux
   vifm
   imagemagick
+  gimp
 )
   #ranger
 
