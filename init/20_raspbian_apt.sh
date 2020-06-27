@@ -31,6 +31,7 @@ packages=(
   lynx
   tmux
   vifm
+  imagemagick
 )
   #ranger
 
