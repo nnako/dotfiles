@@ -3,7 +3,7 @@
 #
 
 # python versions
-vPython2=2.7.15          # version number for python v2
+vPython2=2.7.16          # version number for python v2
 sPython2name=python2.7   # name of python v2 installation
 sPython2venv=python27    # name of python v2 virtual environment
 vPython3=3.7.2           # version number for python v3
@@ -24,7 +24,7 @@ deactivate
 
 
 #
-## install python version v2 from source
+# install python version v2 from source
 #
 
 if [[ ! -d $sPythonBaseDir/$sPython2name ]]; then
@@ -48,7 +48,7 @@ fi
 
 
 #
-## install python version v3 from source
+# install python version v3 from source
 #
 
 if [[ ! -d $sPythonBaseDir/$sPython3name ]]; then
@@ -65,7 +65,7 @@ if [[ ! -d $sPythonBaseDir/$sPython3name ]]; then
     make
     sudo make install
 
-    # link python3 and python3.4 to v3.4 (not v3.2)
+    # link python3 and python3.x
     sudo ln -sf ${sPythonBaseDir}/${sPython3name}/bin/${sPython3name} /usr/bin/python3
     sudo ln -sf ${sPythonBaseDir}/${sPython3name}/bin/${sPython3name} /usr/local/bin/python3
     sudo ln -sf ${sPythonBaseDir}/${sPython3name}/bin/${sPython3name} /usr/bin/${sPython3name}
@@ -77,7 +77,7 @@ fi
 
 
 #
-## install setuptools as well as pip
+# install setuptools as well as pip
 #
 
 # set module name
@@ -110,7 +110,7 @@ fi
 
 
 #
-## install virtual environments
+# install virtual environments
 #
 
 e_header "Installing Virtual Environments"
