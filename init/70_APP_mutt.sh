@@ -18,7 +18,7 @@ sudo apt-get update
 sudo apt-get install mutt
 
 # configure mutt to use LOCAL mail storage
-FILEPATH=/home/pi/.config/mutt/muttrc
+FILEPATH=/home/pi/.mutt/muttrc
 cat > ${FILEPATH} <<EOF
 #
 # MAILBOX
@@ -31,7 +31,7 @@ set mbox_type = Maildir
 set folder    = "~/Mail"
 
 # configure default account settings
-source ~/.config/mutt/accounts/nnamdi
+source ~/.mutt/accounts/nnamdi
 
 
 
@@ -41,7 +41,7 @@ source ~/.config/mutt/accounts/nnamdi
 #
 
 # choose application
-set editor=vim
+set editor=`echo \$EDITOR`
 
 # enable change of HEADER in editor
 set use_from
@@ -99,7 +99,7 @@ mailboxes \
 # TOGGLE VIEW SETTINGS
 #
 
-source ~/.config/mutt/index_view__sort_threaded.rc
+source ~/.mutt/index_view__sort_threaded.rc
 # and set key "<SHIFT> + <S>" to toggle to view_by_date
 
 
@@ -113,7 +113,7 @@ macro index <f3> \
 "\
 :set from=nnamdi.kohn@web.de<enter>\
 :set status_format=\"-%r-nnamdi.kohn@web.de: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?o? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l]---(%s/%S)-%>-(%P)---\"<enter>\
-:source ~/.config/mutt/accounts/nnamdi<enter>\
+:source ~/.mutt/accounts/nnamdi<enter>\
 <change-folder>!<enter>\
 " \
 "Switch to nnamdi.kohn@web.de"
@@ -123,7 +123,7 @@ macro index <f4> \
 "\
 :set from=nnako@web.de\n\
 :set status_format=\"-%r-nnako@web.de: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?o? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l]---(%s/%S)-%>-(%P)---\"\n\
-:source ~/.config/mutt/accounts/nnako\n\
+:source ~/.mutt/accounts/nnako\n\
 <change-folder>!<enter>\
 " \
 "Switch to nnako@web.de"
@@ -134,8 +134,8 @@ macro index <f4> \
 # as well as color settings for the
 # display within mutt
 #
-folder-hook NnamdiKohn/* source ~/.config/mutt/accounts/nnamdi
-folder-hook Nnako/*      source ~/.config/mutt/accounts/nnako
+folder-hook NnamdiKohn/* source ~/.mutt/accounts/nnamdi
+folder-hook Nnako/*      source ~/.mutt/accounts/nnako
 
 
 
