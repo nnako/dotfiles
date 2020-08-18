@@ -3,7 +3,8 @@
 #
 
 prjname="APP__surveillance"
-prjpath="pi@192.168.1.49:/home/pi/usbdrv/_python/$prjname.git"
+#prjpath="pi@192.168.1.49:/home/pi/usbdrv/_python/$prjname.git"
+prjpath="https://bitbucket.com/nnako/surveillance.git"
 
 # move into Python v2 virtual environment if possible
 #workon $sPython2venv
