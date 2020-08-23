@@ -6,9 +6,9 @@
 packages=(
     python-pip
     python3-pip
-    python3-picamera
     python3-venv
 )
+    #python3-picamera
 
 # filter packages which have already been installed
 packages=($(setdiff "${packages[*]}" "$(dpkg --get-selections | grep -v deinstall | awk '{print $1}')"))
