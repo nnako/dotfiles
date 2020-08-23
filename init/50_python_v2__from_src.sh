@@ -96,10 +96,3 @@ if [[ ! -d $HOME/.virtualenvs/${sPython2venv} ]]; then
     sudo pip install -IU pip
     deactivate
 fi
-
-# ENV for python v3 and update pip
-if [[ ! -d $HOME/.virtualenvs/${sPython3venv} ]]; then
-    mkvirtualenv ${sPython3venv} -p ${sPythonBaseDir}/${sPython3name}/bin/${sPython3name}
-    sudo pip install -IU pip
-    deactivate
-fi
