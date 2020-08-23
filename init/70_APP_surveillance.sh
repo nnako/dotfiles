@@ -3,11 +3,26 @@
 #
 
 prjname="APP__surveillance"
+envname="ENV__surveillance__py37"
 #prjpath="pi@192.168.1.49:/home/pi/usbdrv/_python/$prjname.git"
 prjpath="https://bitbucket.com/nnako/surveillance.git"
 
-# move into Python v2 virtual environment if possible
+
+
+
+#
+# handle virtual environment for project
+#
+
+# out of precaution
+deactivate
+
+# create Python v3 environment
+python3 -m venv $HOME/$envname
+
+# move into Python v3 virtual environment if possible
 #workon $sPython2venv
+source $HOME/$envname/bin/activate
 
 
 
@@ -23,9 +38,6 @@ fi
 
 # move into project folder
 cd $HOME/$prjname
-
-# prepare executable application (neccessity of click module)
-#pip install --editable .
 
 # create temporary project folder (if not existent)
 if [[ ! -d "$HOME/.$prjname" ]]; then
@@ -77,7 +89,7 @@ fi
 # install PIL
 #
 
-pip install pillow
+python3 -m pip install pillow
 
 
 
