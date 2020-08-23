@@ -6,9 +6,6 @@
 vPython2=2.7.16          # version number for python v2
 sPython2name=python2.7   # name of python v2 installation
 sPython2venv=python27    # name of python v2 virtual environment
-vPython3=3.7.2           # version number for python v3
-sPython3name=python3.7   # name of python v3 installation
-sPython3venv=python37    # name of python v3 virtual environment
 sPythonBaseDir=/opt      # base folder name fo install python versions
 
 
@@ -41,35 +38,6 @@ if [[ ! -d $sPythonBaseDir/$sPython2name ]]; then
     #make -j 4
     make
     sudo make install
-
-fi
-
-
-
-
-#
-# install python version v3 from source
-#
-
-if [[ ! -d $sPythonBaseDir/$sPython3name ]]; then
-
-    e_header "... Python v${vPython3} from source into ${sPythonBaseDir}"
-
-    # install python v3 from source
-    cd /tmp
-    wget https://www.python.org/ftp/python/${vPython3}/Python-${vPython3}.tgz
-    tar xvzf Python-${vPython3}.tgz
-    cd Python-${vPython3}/
-    #./configure
-    ./configure --prefix=${sPythonBaseDir}/${sPython3name}
-    make
-    sudo make install
-
-    # link python3 and python3.x
-    sudo ln -sf ${sPythonBaseDir}/${sPython3name}/bin/${sPython3name} /usr/bin/python3
-    sudo ln -sf ${sPythonBaseDir}/${sPython3name}/bin/${sPython3name} /usr/local/bin/python3
-    sudo ln -sf ${sPythonBaseDir}/${sPython3name}/bin/${sPython3name} /usr/bin/${sPython3name}
-    sudo ln -sf ${sPythonBaseDir}/${sPython3name}/bin/${sPython3name} /usr/local/bin/${sPython3name}
 
 fi
 
