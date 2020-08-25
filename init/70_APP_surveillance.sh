@@ -48,24 +48,34 @@ fi
 
 
 #
-# handle virtual environment for project
+# create virtual environment for project
 #
 
-# out of precaution
-deactivate
+if [[ ! -d "$HOME/$envname" ]]; then
 
-# create Python v3 environment
-python3 -m venv $HOME/$envname
+    # out of precaution
+    deactivate
 
-# move into Python v3 virtual environment if possible
-#workon $sPython2venv
-source $HOME/$envname/bin/activate
+    # create Python v3 environment
+    python3 -m venv $HOME/$envname
+
+    # move into Python v3 virtual environment if possible
+    source $HOME/$envname/bin/activate
+
+    # install necessary python modules
+    pip install pillow
+    pip install picamera
+
+    # clean exit from virtual environment
+    deactivate
+
+fi
 
 
 
 
 #
-# get and prepare project folders
+# prepare project folders and get sources
 #
 
 # get project source code (if not already present)
@@ -73,26 +83,11 @@ if [[ ! -d "$HOME/$prjname" ]]; then
     git clone $prjpath $HOME/$prjname
 fi
 
-# move into project folder
-cd $HOME/$prjname
-
 # create temporary project folder (if not existent)
 if [[ ! -d "$HOME/.$prjname" ]]; then
     mkdir $HOME/.$prjname
 fi
 
-
-
-
-#
-# install PIL
-#
-
-# we are inside the virtual environment, here
-
-pip install pillow
-pip install picamera
-
-# clean exit from virtual environment
-deactivate
+# move into project folder
+#cd $HOME/$prjname
 
