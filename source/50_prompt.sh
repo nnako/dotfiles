@@ -105,9 +105,16 @@ function prompt_svn() {
 # PYTHON VIRTUAL ENVIRONMENT info.
 function prompt_venv() {
   prompt_getcolors
-  local info="$(virtualenvwrapper_get_python_version 2> /dev/null)"
-  if [[ ${info:1:1} == "." ]]; then
-    echo "$c1[${c0}PY${info:0:1}${info:2:1}$c1]$c9"
+
+  # OLD IMPLEMENTATION USING RETURN FROM VIRTUALENVWRAPPER
+  #local info="$(virtualenvwrapper_get_python_version 2> /dev/null)"
+  #if [[ ${info:1:1} == "." ]]; then
+    #echo "$c1[${c0}PY${info:0:1}${info:2:1}$c1]$c9"
+  #fi
+
+  local info="$(echo $VIRTUAL_ENV | rev | cut -d'/' -f 1 | rev)"
+  if [[ -n ${info} ]]; then
+    echo "$c1[${c0}${info}$c1]$c9"
   fi
 }
 
