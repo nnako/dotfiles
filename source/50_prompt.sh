@@ -156,9 +156,6 @@ function prompt_command() {
   # go to next row
   PS1="$PS1\n"
 
-  # date: [HH:MM:SS]
-  PS1="$PS1$c1[$c0$(date +"%H$c1:$c0%M$c1:$c0%S")$c1]$c9"
-
   # python virtual environment identifier
   PS1="$PS1$(prompt_venv)"
 
@@ -169,8 +166,17 @@ function prompt_command() {
   PS1="$PS1$(prompt_hg)"
   # git: [branch:flags]
   PS1="$PS1$(prompt_git)"
+
+  # go to next row
+  PS1="$PS1\n"
+
+  # date: [HH:MM:SS]
+  PS1="$PS1$c1[$c0$(date +"%H$c1:$c0%M$c1:$c0%S")$c1]$c9"
+
   # exit code: 127
   PS1="$PS1$(prompt_exitcode "$exit_code")"
+
+  # user type
   PS1="$PS1 \$ "
 }
 
