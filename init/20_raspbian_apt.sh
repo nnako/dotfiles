@@ -1,5 +1,5 @@
 #
-## check for execution permission
+# check for execution permission
 #
 
 is_raspbian || return 1
@@ -8,7 +8,7 @@ is_raspbian || return 1
 
 
 #
-## install necessary packages
+# define list of desired packages
 #
 
 # define packages
@@ -36,14 +36,22 @@ packages=(
 )
   #ranger
 
+
+
+
+#
+# install chosen packages
+#
+
 # filter packages which have already been installed
 packages=($(setdiff "${packages[*]}" "$(dpkg --get-selections | grep -v deinstall | awk '{print $1}')"))
 
 # install using apt-get
 if (( ${#packages[@]} > 0 )); then
-  e_header "Installing APT packages\n${packages[*]}"
+  e_header "Installing SYSTEM PACKAGES and APPLICATIONS\n${packages[*]}"
   for package in "${packages[@]}"; do
-    sudo apt-get -qq install "$package"
+    #sudo apt-get -qq install "$package"
+    sudo apt -qq install "$package"
   done
 fi
 
@@ -51,8 +59,10 @@ fi
 
 
 #
-## global git parameters
+# global git parameters
 #
+
+e_header "Configure NNAKO as GIT USER"
 
 # email
 git config --global user.email "nnako@web.de"
@@ -64,7 +74,7 @@ git config --global user.name "nnako"
 
 
 #
-## rename device
+# rename device
 #
 
 #...
