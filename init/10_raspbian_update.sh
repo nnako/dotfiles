@@ -23,7 +23,7 @@ is_raspbian || return 1
 # update and upgrade packages
 #
 
-e_header "Updating APT"
+e_header "Upgrading LINUX DISTRIBUTION"
 #sudo apt-get -qq update
 sudo apt -qq update
 #sudo apt-get -qq dist-upgrade
