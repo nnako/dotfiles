@@ -22,6 +22,7 @@ packages=(
   libsqlite3-dev
   tk-dev
   libssl-dev
+  libxslt-dev
   openssl
   htop
   nmap
