@@ -11,12 +11,17 @@ is_raspbian || return 1
 # install hardware relevant stuff
 #
 
-e_header "Configuring HARDWARE (keyboard, timezone,...)"
+e_header "Configuring LANGUAGE, KEYBOARD and TIMEZONE"
 
-# keyboard, display and timezone
+# system display language configuration
 sudo dpkg-reconfigure locales
+
+# keyboard configuration
 sudo dpkg-reconfigure keyboard-configuration
+
+# timezone configuration
 sudo dpkg-reconfigure tzdata
-#sudo apt-get -qq install rpi-update
-sudo apt -qq install rpi-update
-sudo rpi-update
+
+# prompt for RPI-UPDATE
+#sudo apt -y install rpi-update
+#sudo rpi-update

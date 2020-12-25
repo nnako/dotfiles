@@ -51,7 +51,7 @@ if (( ${#packages[@]} > 0 )); then
   e_header "Installing SYSTEM PACKAGES and APPLICATIONS\n${packages[*]}"
   for package in "${packages[@]}"; do
     #sudo apt-get -qq install "$package"
-    sudo apt -qq install "$package"
+    sudo apt -y install "$package"
   done
 fi
 
