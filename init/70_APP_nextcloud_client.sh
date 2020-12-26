@@ -40,7 +40,7 @@ packages=($(setdiff "${packages[*]}" "$(dpkg --get-selections | grep -v deinstal
 if (( ${#packages[@]} > 0 )); then
   e_header "Installing APT packages\n${packages[*]}"
   for package in "${packages[@]}"; do
-    sudo apt-get -qq install "$package"
+    sudo apt -y install "$package"
   done
 fi
 
