@@ -51,7 +51,7 @@ cd $HOME/$prjname
 #
 
 # create python environment
-#...
+python3 -m venv ~/ENV__calmgt__py37
 
 # move into Python v3 virtual environment
 source ~/ENV__calmgt__py37/bin/activate
