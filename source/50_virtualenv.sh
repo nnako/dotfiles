@@ -1,7 +1,7 @@
 #
-## settings for virtual environment handling
+# settings for virtual environment handling
 #
 
-WORKON_HOME=$HOME/.virtualenvs
-PROJECT_HOME=$HOME/PRJ
-source /usr/local/bin/virtualenvwrapper.sh
+#WORKON_HOME=$HOME/.virtualenvs
+#PROJECT_HOME=$HOME/PRJ
+#source /usr/local/bin/virtualenvwrapper.sh
