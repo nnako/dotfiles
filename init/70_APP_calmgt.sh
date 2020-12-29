@@ -67,6 +67,8 @@ source ~/ENV__calmgt__py37/bin/activate
 packages=(
   remind
   sendemail
+  libnet-ssleay-perl
+  libio-socket-ssl-perl
 )
 
 # filter packages which have already been installed
