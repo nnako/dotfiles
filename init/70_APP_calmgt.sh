@@ -76,6 +76,7 @@ source $HOME/$envname/bin/activate
 # GENERAL
 pip install isoweek
 pip install pyinstaller  # in order to be able to easily build one-file
+pip install pudb         # TUI debugger
 
 # EXCEL
 pip install xlrd
