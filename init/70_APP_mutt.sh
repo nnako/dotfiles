@@ -1,10 +1,29 @@
-# https://whatsecurity.nl/using-mutt_offline.html
 
 
 
 
 #
-# install and configure mutt
+# install helpful tools
+#
+
+# follow links displayed within the mail text
+sudo apt install urlview
+
+
+
+
+#
+# install the application
+#
+
+sudo apt-get update
+sudo apt-get install mutt
+
+
+
+
+#
+# configure mutt for offline usage
 #
 
 # When you have a stable internet connection, such as in the office, Mutt is a
@@ -13,9 +32,7 @@
 # Mutt offline, syncing all data when the internet connection is available
 # again.
 
-# install application
-sudo apt-get update
-sudo apt-get install mutt
+# https://whatsecurity.nl/using-mutt_offline.html
 
 # configure mutt to use LOCAL mail storage
 FILEPATH=/home/pi/.mutt/muttrc
