@@ -6,7 +6,7 @@ sVimSourceUrl=https://github.com/vim/vim.git
 
 
 #
-## install vim from source
+# install vim from source
 #
 
 # only install if not already installed
@@ -14,11 +14,31 @@ sVimSourceUrl=https://github.com/vim/vim.git
 
     e_header "Installing Vim from source"
 
-    # get the necessary packages
-    sudo apt-get install libncurses5-dev python-dev -y
-
     # remove already existing packages if present
-    sudo apt-get remove vim vim-tiny vim-common vim-runtime
+    sudo apt remove --purge \
+        vim \
+        vim-tiny \
+        vim-gnome \
+        vim-common \
+        vim-runtime
+
+    # get the necessary packages
+    sudo apt install -y \
+        liblua5.1-dev \
+        luajit \
+        libluajit-5.1 \
+        python-dev \
+        python3-dev \
+        libperl-dev \
+        libncurses5-dev \
+        libatk1.0-dev \
+        libx11-dev \
+        libxpm-dev \
+        libxt-dev
+
+        #ruby-dev \
+        #ruby2.5 \
+        #ruby2.5-dev \
 
     # get the sources
     cd /tmp
@@ -26,7 +46,31 @@ sVimSourceUrl=https://github.com/vim/vim.git
     cd vim
 
     # configure and compile any newest version into general folder
-    ./configure --with-features=huge --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config --prefix=/usr
+    ./configure \
+        --with-features=huge \
+        --enable-pythoninterp \
+        --prefix=/usr/local \
+        --enable-multibyte \
+        --enable-perlinterp=dynamic \
+        --with-rubyinterp=dynamic \
+        --with-ruby-command=/usr/bin/ruby \
+        --enable-python3interp \
+        --with-python3-config-dir=/usr/bin/python3 \
+        --enable-luainterp \
+        --with-luajit \
+        --enable-cscope \
+        --enable-gui=auto \
+        --with-x \
+        --enable-fontset \
+        --enable-largefile \
+        --disable-netbeans \
+        --with-compiledby="NNAKO <nnako@web.de>" \
+        --enable-fail-if-missing
+
+        #--enable-pythoninterp=dynamic \
+        #--with-python-config-dir=/usr/bin/python \
+
+    # make the sources
     #make VIMRUNTIMEDIR=/usr/share/vim/vim74
     make VIMRUNTIME=/usr/share/vim
     sudo make install
@@ -37,7 +81,7 @@ sVimSourceUrl=https://github.com/vim/vim.git
 
 
 #
-## get plugins
+# get plugins
 #
 
 e_header "Installing Vim Plugins"
