@@ -9,32 +9,36 @@
     "
     " }}}
 " make vim incompatible to vi (better settings than VI) {{{
-    "
-    set nocompatible
-    "
-    " }}}
+"
+set nocompatible
+"
+" }}}
 " LOAD and EXECUTE EXTERNAL SETTINGS {{{
-    "
+"
 
-    " example
-    source $VIMRUNTIME/vimrc_example.vim
+" example
+source $VIMRUNTIME/vimrc_example.vim
 
-    " controls like in WINDOWS operating system
-    source $VIMRUNTIME/mswin.vim
-    behave mswin
-    "
-    " }}}
+" controls like in WINDOWS operating system
+source $VIMRUNTIME/mswin.vim
+behave mswin
+"
+" }}}
 " PATHOGEN PACKAGE MANAGER {{{
-    "
-    execute pathogen#infect()
-    "execute pathogen#helptags()
-    "
-    " }}}
+"
+execute pathogen#infect()
+"execute pathogen#helptags()
+"
+" }}}
 " VIEW settings {{{
 "
 
 " default font for all editor windows
-set gfn=Lucida_Console:h9:cANSI
+if s:is_windows
+    set gfn=Lucida_Sans_Typewriter:h8:cANSI
+else
+    set gfn=Lucida_Console:h9:cANSI
+endif
 
 " automatically read externally modifies files
 set autoread
@@ -100,19 +104,21 @@ set encoding=utf-8
 
 " disable backup and swap files {{{
 "
-set nobackup
-set nowritebackup
-set noswapfile
+"set nobackup
+"set nowritebackup
+"set noswapfile
 "
 " }}}
 " enable backup and swap files in separate folder on WINDOWS SYSTEM {{{
 "
-"set backup
-set backupdir=c:\tmp,c:\temp,c:\WINDOWS\Temp,c:\_TEMP,d:\temp,d:\_TEMP,.
-"set backupskip=c:\WINDOWS\Temp
-set directory=c:\tmp,c:\temp,c:\WINDOWS\Temp,c:\_TEMP,d:\temp,d:\_TEMP,.
-set undodir=c:\WINDOWS\Temp
-"set writebackup
+if s:is_windows
+    "set backup
+    set backupdir=c:\tmp,c:\temp,c:\WINDOWS\Temp,c:\_TEMP,d:\temp,d:\_TEMP,.
+    "set backupskip=c:\WINDOWS\Temp
+    set directory=c:\tmp,c:\temp,c:\WINDOWS\Temp,c:\_TEMP,d:\temp,d:\_TEMP,.
+    set undodir=c:\WINDOWS\Temp
+    "set writebackup
+endif
 "
 " }}}
 " set temporary folder (necessary for diff command) on LINUX SYSTEM {{{
@@ -148,19 +154,20 @@ let g:pymode_rope = 0
 let g:pymode_rope_autoimport = 0
 "
 " }}}
-" VIM-SESSION -> deactivate auto save question {{{
+" VIM-SESSION -> come convenence settings {{{
 "
 let g:session_autosave = 'no'
 set sessionoptions-=buffers
+let g:session_persist_globals = ['&relativenumber', 'nowrap']
 "
 " }}}
-" SIMPYLFOLD  -> settings {{{
-    "
-    "let g:SimpylFold_docstring_preview = 1
-    "let g:SimpylFold_fold_docstring = 0
-    "let g:SimpylFold_fold_import = 0
-    "
-    " }}}
+" ULTISNIPS   -> jump to next / previous tab position using <RIGHT>, <LEFT> {{{
+"
+let g:UltiSnipsExpandTrigger="<c-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"
+" }}}
 " ANYFOLD     -> settings {{{
     "
     autocmd FileType * AnyFoldActivate   " activate for ALL filetypes
@@ -168,7 +175,22 @@ set sessionoptions-=buffers
     "set foldlevel=99 " open all folds
     "
     " }}}
-
+" NERDTREE    -> settings {{{
+    "
+    let NERDTreeIgnore = ['\.bak$', '\.pyc$', '\.pyd$', '__pycache__']
+    let NERDTreeMinimalUI = 1
+    nnoremap <localleader>n <ESC>:NERDTreeToggle<CR>
+    "
+    " }}}
+" TTODO       -> settings {{{
+    "
+    if s:is_windows
+        let g:ttodo#dirs=['D:/_TEMP/']
+    else
+        let g:ttodo#dirs=['~/todo/']
+    endif
+    "
+    " }}}
 
 
 
@@ -183,17 +205,10 @@ let mapleader = ","
 let localleader = "\\"
 "
 " }}}
-" [ all ]  <CTRL> + <N>  =>  stop highlighting {{{
-"
-noremap <C-n> :nohl<CR>
-vnoremap <C-n> <Esc>:nohl<CR>
-inoremap <C-n> <Esc>:nohl<CR>
-"
-" }}}
 " [NORMAL] change tab {{{
 "
-map <Leader>n <ESC>:tabprevious<CR>
-map <Leader>m <ESC>:tabnext<CR>
+nnoremap <Leader>n <ESC>:tabprevious<CR>
+nnoremap <Leader>m <ESC>:tabnext<CR>
 "
 " }}}
 " [VISUAL] sort selection vertically {{{
@@ -216,7 +231,10 @@ nnoremap <leader>h *<C-O>
 " }}}
 " [NORMAL] highlight word at cursor and search in project files {{{
 "
-nnoremap <leader>H *<C-O>:execute "vimgrep //gj **/*.*" <Bar> cw<CR>
+nnoremap <leader>H *<C-O>
+    \:execute "set wildignore+=*.bak,*.dll,*.exe,*.frx,*.gif,*.jpg,*.obj,*.pdf,*.pkg,*.png,*.ppt,*.pyd,*.pyz,*.toc,*.xls*" <Bar>
+    \:execute "noautocmd vimgrep //gj **/*.*" <Bar>
+    \cw<CR>
 "
 " }}}
 " [NORMAL] clear quickfix window to disable jumping around on cursor keys {{{
@@ -248,8 +266,14 @@ inoremap jk <Esc>
 " }}}
 " [NORMAL] move text line UP / DOWN using <CTRL> + <UP> / <DOWN> {{{
 "
-noremap <C-down> ddp
-noremap <C-up> ddkP
+nnoremap <C-down> ddp
+nnoremap <C-up> ddkP
+"
+" }}}
+" [NORMAL] go UP / DOWN one line and CENTER row using <CTRL> + <K> / <J> {{{
+"
+nnoremap <C-k> kzz
+nnoremap <C-j> jzz
 "
 " }}}
 " [INSERT] no CURSOR KEYS {{{
@@ -268,10 +292,17 @@ vnoremap <left> <Nop>
 vnoremap <right> <Nop>
 "
 " }}}
+" [ all ]  <CTRL> + <N>  =>  stop highlighting {{{
+"
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> <Esc>:nohl<CR>
+inoremap <C-n> <Esc>:nohl<CR>
+"
+" }}}
 " [NORMAL] <CTRL> + <movement>  =>  move around existing split windows {{{
 "
-map <c-j> <c-w>j
-map <c-k> <c-w>k
+"map <c-j> <c-w>j
+"map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 "
@@ -315,8 +346,8 @@ nnoremap <Down> :cn<CR>zz
 " }}}
 " [NORMAL] continue ordered list using <LEADER> + <CR> {{{
 "
-nnoremap <Leader><CR> yyp<C-a>elC<SPACE><SPACE><ESC>
-inoremap <Leader><CR> <ESC>yyp<C-a>elC<SPACE>
+"nnoremap <Leader><CR> yyp<C-a>elC<SPACE><SPACE><ESC>
+"inoremap <Leader><CR> <ESC>yyp<C-a>elC<SPACE>
 "
 " }}}
 " [NORMAL] sudo write for current file using command W {{{
@@ -329,12 +360,10 @@ nnoremap :W :w !sudo tee %
 nnoremap <TAB> %
 "
 " }}}
-" [INSERT] builtin auto-completion using <UP>, <RIGHT>, <DOWN> and <LEFT> {{{
+" [INSERT] builtin auto-completion using <UP>, <DOWN> {{{
 "
 inoremap <UP> <C-p>
-inoremap <RIGHT> <C-n>
 inoremap <DOWN> <C-n>
-inoremap <LEFT> <C-p>
 "
 " }}}
 " [NORMAL] reactivate visual block mode using <CTRL> + <V> key {{{
@@ -343,6 +372,7 @@ nnoremap <C-v> <C-v>
 vnoremap <C-v> <C-v>
 "
 " }}}
+
 
 
 
@@ -451,12 +481,13 @@ autocmd bufwritepost _vimrc source %
 "#############################################
 
 
-" [comments] - for all programming languages {{{
+"
+" commenting of lines
 "
 autocmd FileType javascript nnoremap <buffer> <localleader>c I//<ESC>
 autocmd FileType python     nnoremap <buffer> <localleader>c I#<ESC>
-"
-" }}}
+
+
 " [JAVASCRIPT] - javascript file settings {{{
 "
 "
