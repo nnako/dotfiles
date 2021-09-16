@@ -11,8 +11,8 @@
 # Raspberryi Pi running the Raspbian operating system, you`ll have to install
 # HP Linux Imaging and Printing and CUPS.
 
-sudo apt-get update
-sudo apt-get install hplip cups
+sudo apt update
+sudo apt install hplip cups
 sudo usermod -a -G lpadmin pi
 
 # 1.
@@ -30,10 +30,19 @@ sudo usermod -a -G lpadmin pi
 # install SANE scanner control software
 #
 
-sudo apt-get install sane
+sudo apt install sane
 sudo sane-find-scanner
 
 # the specific scanner should now be found
+
+
+
+
+#
+# set HP Officejet 8600 PRO as default printer
+#
+
+lpoptions -d Officejet_Pro_8600
 
 
 
