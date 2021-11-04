@@ -15,7 +15,7 @@ sVimSourceUrl=https://github.com/vim/vim.git
     e_header "Installing Vim from source"
 
     # remove already existing packages if present
-    sudo apt remove --purge \
+    sudo apt remove -y --purge \
         vim \
         vim-tiny \
         vim-gnome \
