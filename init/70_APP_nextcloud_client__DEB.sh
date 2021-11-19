@@ -10,13 +10,18 @@
 
 # define packages
 packages=(
-  q/qtwebengine-opensource-src/libqt5webenginecore5_5.15.6+dfsg-2+b1_armhf.deb
-  q/qtwebengine-opensource-src/libqt5webenginewidgets5_5.15.6+dfsg-2+b1_armhf.deb
-  n/nextcloud-desktop/libnextcloudsync0_3.1.1-2+deb11u1_armhf.deb
-  n/nextcloud-desktop/nextcloud-desktop_3.1.1-2+deb11u1_armhf.deb
+  q/qtwebengine-opensource-src/libqt5webenginecore5_5.11.3+dfsg-2+deb10u1_armhf.deb
+  q/qtwebengine-opensource-src/libqt5webenginewidgets5_5.11.3+dfsg-2+deb10u1_armhf.deb
+  n/nextcloud-desktop/libnextcloudsync0_2.5.1-3+deb10u2_armhf.deb
+  n/nextcloud-desktop/nextcloud-desktop_2.5.1-3+deb10u2_armhf.deb
 )
 
 # DOES NOT WORK
+
+  #q/qtwebengine-opensource-src/libqt5webenginecore5_5.15.6+dfsg-2+b1_armhf.deb
+  #q/qtwebengine-opensource-src/libqt5webenginewidgets5_5.15.6+dfsg-2+b1_armhf.deb
+  #n/nextcloud-desktop/libnextcloudsync0_3.1.1-2+deb11u1_armhf.deb
+  #n/nextcloud-desktop/nextcloud-desktop_3.1.1-2+deb11u1_armhf.deb
 
   #q/qtwebengine-opensource-src/libqt5webenginecore5_5.15.6+dfsg-2+b1_armhf.deb
   #q/qtwebengine-opensource-src/libqt5webenginewidgets5_5.15.6+dfsg-2+b1_armhf.deb
