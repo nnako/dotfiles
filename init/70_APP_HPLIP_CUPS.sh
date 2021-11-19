@@ -42,7 +42,21 @@ sudo sane-find-scanner
 # set HP Officejet 8600 PRO as default printer
 #
 
-lpoptions -d Officejet_Pro_8600
+# user instructions
+echo ''
+echo ''
+echo '##############################'
+echo ''
+echo 'IN ORDER TO COMPLETELY SETUP THE PRINTER, PLEASE MAKE SURE TO DO THE FOLLOWING ACTIONS:'
+echo ''
+echo '$ lpoptions -d Officejet_Pro_8600'
+echo ''
+echo '##############################'
+echo ''
+echo ''
+
+# when printer was identified
+#lpoptions -d Officejet_Pro_8600
 
 
 
