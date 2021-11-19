@@ -16,8 +16,8 @@ sudo apt install urlview
 # install the application
 #
 
-sudo apt-get update
-sudo apt-get install mutt
+sudo apt -y update
+sudo apt -y install mutt
 
 
 
@@ -35,6 +35,7 @@ sudo apt-get install mutt
 # https://whatsecurity.nl/using-mutt_offline.html
 
 # configure mutt to use LOCAL mail storage
+mkdir ~/.mutt
 FILEPATH=/home/pi/.mutt/muttrc
 cat > ${FILEPATH} <<EOF
 #
@@ -289,7 +290,7 @@ EOF
 # application to enable following urls from within emails
 
 # install application
-sudo apt-get install urlscan
+sudo apt -y install urlscan
 
 
 
@@ -299,7 +300,7 @@ sudo apt-get install urlscan
 #
 
 # install application
-sudo apt-get install offlineimap
+sudo apt -y install offlineimap
 
 # configure offlineimap
 FILEPATH=~/.offlineimaprc
@@ -353,7 +354,24 @@ restoreatime = no
 
 EOF
 
-# download email
+# user instructions
+echo ''
+echo ''
+echo '##############################'
+echo ''
+echo 'IN ORDER TO COMPLETELY SETUP OFFLINEIMAP, PLEASE MAKE SURE TO DO THE FOLLOWING ACTIONS:'
+echo ''
+echo "1. open the file ${FILEPATH} and"
+echo '2. replace the values for <username> and <password> as fit'
+echo '3. after save, you can download the email using the following command:'
+echo ''
+echo '$ offlineimap'
+echo ''
+echo '##############################'
+echo ''
+echo ''
+
+# get mail
 offlineimap
 
 
@@ -364,13 +382,30 @@ offlineimap
 #
 
 # install application
-sudo apt-get install notmuch notmuch-mutt
+sudo apt -y install notmuch notmuch-mutt
+
+# user instructions
+echo ''
+echo ''
+echo '##############################'
+echo ''
+echo 'IN ORDER TO COMPLETELY SETUP NOTMUCH, PLEASE MAKE SURE TO DO THE FOLLOWING ACTION:'
+echo ''
+echo '$ notmuch setup'
+echo ''
+echo 'AND AFTER YOU LOADED ALL RELEVANT MAIL INTO THE LOCAL MAIL FOLDER:'
+echo ''
+echo '$ notmuch new'
+echo ''
+echo '##############################'
+echo ''
+echo ''
 
 # configure notmuch
-notmuch setup
+#notmuch setup
 
 # index email database
-notmuch new
+#notmuch new
 
 
 
@@ -380,7 +415,7 @@ notmuch new
 #
 
 # install application
-sudo apt-get install msmtp
+sudo apt -y install msmtp
 
 # create configuration file
 FILEPATH=~/.msmtprc
@@ -430,7 +465,7 @@ cp /usr/share/doc/msmtp/examples/msmtpqueue/msmtp-runqueue.sh ~/bin/
 #
 
 # install network manager
-sudo apt-get install network-manager
+sudo apt -y install network-manager
 #sudo apt install network-manager network-manager-gnome openvpn \
 #openvpn-systemd-resolved network-manager-openvpn \
 #network-manager-openvpn-gnome
@@ -622,5 +657,16 @@ sudo chmod a+x ${FILEPATH}
 # modify cron
 #
 
-#...
-
+# user instructions
+echo ''
+echo ''
+echo '##############################'
+echo ''
+echo 'IN ORDER TO COMPLETELY SETUP EMAIL CHECK / SEND, PLEASE MAKE SURE MODIFY CRON TO DO THE FOLLOWING:'
+echo ''
+echo '$ notmuch setup'
+echo '$ notmuch new'
+echo ''
+echo '##############################'
+echo ''
+echo ''
