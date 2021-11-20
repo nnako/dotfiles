@@ -38,14 +38,14 @@ mkdir ~/bin
 # create account configuration file
 FILEPATH=~/.mutt/accounts/dev
 cat > ${FILEPATH} <<EOF
-set from      = "<email>"
+set from      = "<DEV_EMAIL>"
 set sendmail  = "~/bin/msmtp-enqueue.sh -a dev"
-#set folder    = "~/mail/<DEV_ACCOUNT_USERNAME>"
-#set spoolfile = "~/mail/<DEV_ACCOUNT_USERNAME>/INBOX"
-set spoolfile = "~/mail/<DEV_ACCOUNT_USERNAME>/Unbekannt"
-set mbox      = "~/mail/Archive"
-set record    = "~/mail/Sent"
-set postponed = "~/mail/Drafts"
+#set folder    = "~/Mail/<DEV_ACCOUNT_USERNAME>"
+#set spoolfile = "~/Mail/<DEV_ACCOUNT_USERNAME>/INBOX"
+set spoolfile = "~/Mail/<DEV_ACCOUNT_USERNAME>/Unbekannt"
+set mbox      = "~/Mail/Archive"
+set record    = "~/Mail/Sent"
+set postponed = "~/Mail/Drafts"
 
 color status brightred blue
 EOF
@@ -53,13 +53,13 @@ EOF
 # create account configuration file
 FILEPATH=~/.mutt/accounts/private
 cat > ${FILEPATH} <<EOF
-set from      = "<email>"
+set from      = "<PRIVATE_EMAIL>"
 set sendmail  = "~/bin/msmtp-enqueue.sh -a private"
-#set folder    = "~/mail/<PRIVATE_ACCOUNT_USERNAME>"
-set spoolfile = "~/mail/<PRIVATE_ACCOUNT_USERNAME>/INBOX"
-set mbox      = "~/mail/Archive"
-set record    = "~/mail/Sent"
-set postponed = "~/mail/Drafts"
+#set folder    = "~/Mail/<PRIVATE_ACCOUNT_USERNAME>"
+set spoolfile = "~/Mail/<PRIVATE_ACCOUNT_USERNAME>/INBOX"
+set mbox      = "~/Mail/Archive"
+set record    = "~/Mail/Sent"
+set postponed = "~/Mail/Drafts"
 
 color status white blue
 EOF
@@ -117,7 +117,7 @@ cat > ${FILEPATH} <<EOF
 # fetch mail from any remote location
 
 set mbox_type = Maildir
-set folder    = "~/mail"
+set folder    = "~/Mail"
 
 # configure default account settings
 source ~/.mutt/accounts/private
@@ -185,10 +185,10 @@ set status_format="-%r-<PRIVATE_EMAIL>: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:
 # DEFINE VISIBLE MAILBOXES
 #
 
-# the mailboxes are looked up within the ~/mail/ folder and then
+# the mailboxes are looked up within the ~/Mail/ folder and then
 # added to the mailbox variable to be available within mutt
 
-mailboxes \`find ~/mail/ -type d -name cur -printf '%h '\`
+mailboxes \`find ~/Mail/ -type d -name cur -printf '%h '\`
 
 
 
@@ -285,8 +285,8 @@ macro index,pager        dat       "<delete-thread><sync-mailbox>"              
 
 # Go to folder...
 #macro index,pager        gi "<change-folder>=INBOX<enter>"         "open account-specific inbox"
-macro index,pager        gd "<change-folder>~/mail/Drafts<enter>"  "open global drafts"
-macro index,pager        gs "<change-folder>~/mail/Sent<enter>"    "open global sent"
+macro index,pager        gd "<change-folder>~/Mail/Drafts<enter>"  "open global drafts"
+macro index,pager        gs "<change-folder>~/Mail/Sent<enter>"    "open global sent"
 #macro index,pager        gu "<change-folder>=Unbekannt<enter>"     "open account-specific unknown"
 #macro index,pager        gt "<change-folder>\$trash<enter>"         "open trash"
 macro index,pager        gf "<change-folder>?"                     "open mailbox..."
@@ -383,7 +383,7 @@ sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
 [Repository PrivateLocal]
 type = Maildir
-localfolders = ~/mail/<PRIVATE_ACCOUNT_USERNAME>
+localfolders = ~/Mail/<PRIVATE_ACCOUNT_USERNAME>
 restoreatime = no
 
 
@@ -405,7 +405,7 @@ sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
 [Repository DevLocal]
 type = Maildir
-localfolders = ~/mail/<DEV_ACCOUNT_USERNAME>
+localfolders = ~/Mail/<DEV_ACCOUNT_USERNAME>
 restoreatime = no
 
 EOF
