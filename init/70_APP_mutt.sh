@@ -1,4 +1,6 @@
 
+sudo apt -y update
+
 
 
 
@@ -105,7 +107,6 @@ EOF
 # https://whatsecurity.nl/using-mutt_offline.html
 
 # configure mutt to use LOCAL mail storage
-mkdir ~/.mutt
 FILEPATH=/home/pi/.mutt/muttrc
 cat > ${FILEPATH} <<EOF
 #
@@ -116,10 +117,10 @@ cat > ${FILEPATH} <<EOF
 # fetch mail from any remote location
 
 set mbox_type = Maildir
-set folder    = "~/Mail"
+set folder    = "~/mail"
 
 # configure default account settings
-source ~/.mutt/accounts/nnamdi
+source ~/.mutt/accounts/private
 
 
 
@@ -129,7 +130,7 @@ source ~/.mutt/accounts/nnamdi
 #
 
 # choose application
-set editor=`echo \$EDITOR`
+set editor=\`echo \$EDITOR\`
 
 # enable change of HEADER in editor
 set use_from
@@ -148,6 +149,16 @@ set forward_decode
 
 
 
+
+#
+# AUTO VIEWS
+#
+
+auto_view text/html
+
+
+
+
 #
 # DISPLAY AND GENERAL DESIGN
 #
@@ -159,13 +170,13 @@ set index_format="[%Z] %?X?A&-? %D  %-20.20F  %s"
 # PAGER view
 
 # SIDEBAR view
-source "/usr/share/doc/mutt/examples/sample.muttrc-sidebar"
+#source "/usr/share/doc/mutt/examples/sample.muttrc-sidebar"
 
 # switch off the SIDEBAR for now
 set sidebar_visible=no
 
 # default STATUSBAR configuration
-set status_format="-%r-nnamdi.kohn@web.de: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?o? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l]---(%s/%S)-%>-(%P)---"
+set status_format="-%r-<PRIVATE_EMAIL>: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?o? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l]---(%s/%S)-%>-(%P)---"
 
 
 
@@ -174,11 +185,10 @@ set status_format="-%r-nnamdi.kohn@web.de: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? O
 # DEFINE VISIBLE MAILBOXES
 #
 
-# the mailboxes are looked up within the ~/Mail/ folder and then
+# the mailboxes are looked up within the ~/mail/ folder and then
 # added to the mailbox variable to be available within mutt
 
-mailboxes \
-`find ~/Mail/ -type d -name cur -printf '%h '`
+mailboxes \`find ~/mail/ -type d -name cur -printf '%h '\`
 
 
 
@@ -196,25 +206,11 @@ source ~/.mutt/index_view__sort_threaded.rc
 # IDENTITIES
 #
 
-# switch to NnamdiKohn
-macro index <f3> \
-"\
-:set from=nnamdi.kohn@web.de<enter>\
-:set status_format=\"-%r-nnamdi.kohn@web.de: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?o? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l]---(%s/%S)-%>-(%P)---\"<enter>\
-:source ~/.mutt/accounts/nnamdi<enter>\
-<change-folder>!<enter>\
-" \
-"Switch to nnamdi.kohn@web.de"
+# switch to private_account
+macro index <f3> ":set from=<PRIVATE_EMAIL>\\n:set status_format=\"-%r-<PRIVATE_EMAIL>: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?o? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l]---(%s/%S)-%>-(%P)---\"<enter>:source ~/.mutt/accounts/private\\n<change-folder>!\\n" "Switch to <PRIVATE_EMAIL>"
 
-# switch to Nnako
-macro index <f4> \
-"\
-:set from=nnako@web.de\n\
-:set status_format=\"-%r-nnako@web.de: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?o? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l]---(%s/%S)-%>-(%P)---\"\n\
-:source ~/.mutt/accounts/nnako\n\
-<change-folder>!<enter>\
-" \
-"Switch to nnako@web.de"
+# switch to dev_account
+macro index <f4> ":set from=<DEV_EMAIL>\\n:set status_format=\"-%r-<DEV_EMAIL>: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?o? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l]---(%s/%S)-%>-(%P)---\"\\n:source ~/.mutt/accounts/dev\\n<change-folder>!<enter>" "Switch to <DEV_EMAIL>"
 
 # hook identities on folder switch
 #
@@ -222,8 +218,8 @@ macro index <f4> \
 # as well as color settings for the
 # display within mutt
 #
-folder-hook NnamdiKohn/* source ~/.mutt/accounts/nnamdi
-folder-hook Nnako/*      source ~/.mutt/accounts/nnako
+folder-hook <PRIVATE_ACCOUNT_USERNAME>/* source ~/.mutt/accounts/private
+folder-hook <DEV_ACCOUNT_USERNAME>/*      source ~/.mutt/accounts/dev
 
 
 
@@ -270,16 +266,16 @@ bind pager,index         gT        previous-thread
 bind  index,pager        a         group-reply
 
 # move message
-#macro index,pager        ss  "<enter-command> macro browser \\015 \"\<select-entry\>\<sync-mailbox\><enter-command> bind browser \\\\015 select-entry\\015<enter-command> bind browser q exit\\015\"\015<enter-command> macro browser q \"<exit><enter-command> bind browser \\\\015 select-entry\\015<enter-command> bind browser q exit\\015\"\015<save-message>?"                                           "move message to a mailbox"
-macro index              sat ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015'q<untag-pattern>.\\015\"\015<mark-message>q<enter><untag-pattern>.<enter><tag-thread><tag-prefix-cond><save-message>?"                                    "move thread to a mailbox"
-#macro index              \;s ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015<tag-prefix-cond><save-message>?"                                                                                                                    "move tagged messages to a mailbox"
-macro pager              sat ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015<display-message>\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015'q<untag-pattern>.\\015<display-message>\"\015<exit><mark-message>q<enter><untag-pattern>.<enter><tag-thread><tag-prefix><save-message>?" "move thread to a mailbox"
+#macro index,pager        ss  "<enter-command> macro browser \\\\015 \"\<select-entry\>\<sync-mailbox\><enter-command> bind browser \\\\\\\\015 select-entry\\\\015<enter-command> bind browser q exit\\\\015\"\015<enter-command> macro browser q \"<exit><enter-command> bind browser \\\\\\\\015 select-entry\\\\015<enter-command> bind browser q exit\\\\015\"\015<save-message>?" "move message to a mailbox"
+macro index              sat ":macro browser \\\\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015\"\015:macro browser q \"<exit>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015'q<untag-pattern>.\\\\015\"\015<mark-message>q<enter><untag-pattern>.<enter><tag-thread><tag-prefix-cond><save-message>?" "move thread to a mailbox"
+#macro index              \;s ":macro browser \\\\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015\"\015:macro browser q \"<exit>:bind browser \\\\\\\\015 select-entry\\015:bind browser q exit\\\\015\"\015<tag-prefix-cond><save-message>?" "move tagged messages to a mailbox"
+macro pager              sat ":macro browser \\\\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015<display-message>\"\015:macro browser q \"<exit>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015'q<untag-pattern>.\\\\015<display-message>\"\015<exit><mark-message>q<enter><untag-pattern>.<enter><tag-thread><tag-prefix><save-message>?" "move thread to a mailbox"
 
 # copy message
-macro index,pager        cc  ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015<copy-message>?"                                                                                                                                     "copy message to a mailbox"
-macro index              cat ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015'q<untag-pattern>.\\015\"\015<mark-message>q<enter><untag-pattern>.<enter><tag-thread><tag-prefix-cond><copy-message>?"                                    "copy thread to a mailbox"
-macro index              \;c ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015\"\015<tag-prefix-cond><copy-message>?"                                                                                                                    "copy tagged messages to a mailbox"
-macro pager              cat ":macro browser \\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015<display-message>\"\015:macro browser q \"<exit>:bind browser \\\\015 select-entry\\015:bind browser q exit\\015'q<untag-pattern>.\\015<display-message>\"\015<exit><mark-message>q<enter><untag-pattern>.<enter><tag-thread><tag-prefix><copy-message>?" "copy thread to a mailbox"
+macro index,pager        cc  ":macro browser \\\\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015\"\015:macro browser q \"<exit>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015\"\015<copy-message>?" "copy message to a mailbox"
+macro index              cat ":macro browser \\\\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015\"\015:macro browser q \"<exit>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015'q<untag-pattern>.\\\\015\"\015<mark-message>q<enter><untag-pattern>.<enter><tag-thread><tag-prefix-cond><copy-message>?" "copy thread to a mailbox"
+macro index              \;c ":macro browser \\\\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015\"\015:macro browser q \"<exit>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015\"\015<tag-prefix-cond><copy-message>?" "copy tagged messages to a mailbox"
+macro pager              cat ":macro browser \\\\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015<display-message>\"\015:macro browser q \"<exit>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015'q<untag-pattern>.\\\\015<display-message>\"\015<exit><mark-message>q<enter><untag-pattern>.<enter><tag-thread><tag-prefix><copy-message>?" "copy thread to a mailbox"
 
 # delete
 bind pager,index         dT        delete-thread
@@ -289,10 +285,10 @@ macro index,pager        dat       "<delete-thread><sync-mailbox>"              
 
 # Go to folder...
 #macro index,pager        gi "<change-folder>=INBOX<enter>"         "open account-specific inbox"
-macro index,pager        gd "<change-folder>~/Mail/Drafts<enter>"  "open global drafts"
-macro index,pager        gs "<change-folder>~/Mail/Sent<enter>"    "open global sent"
+macro index,pager        gd "<change-folder>~/mail/Drafts<enter>"  "open global drafts"
+macro index,pager        gs "<change-folder>~/mail/Sent<enter>"    "open global sent"
 #macro index,pager        gu "<change-folder>=Unbekannt<enter>"     "open account-specific unknown"
-#macro index,pager        gt "<change-folder>$trash<enter>"         "open trash"
+#macro index,pager        gt "<change-folder>\$trash<enter>"         "open trash"
 macro index,pager        gf "<change-folder>?"                     "open mailbox..."
 
 # tagging
@@ -316,8 +312,8 @@ bind editor              \Cn history-down
 # URLSCAN - handle URLs
 #
 
-macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
-macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro index,pager \\\\u "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \\\\u "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 
 
 
@@ -332,21 +328,11 @@ macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract 
 # provide functionality similar to F8. I’m not sure yet which is the better of
 # the two options.
 
-macro index <F8> \
-"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
-<shell-escape>notmuch-mutt -r --prompt search<enter>\
-<change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
-<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>i" \
-"notmuch: search mail"
+macro index <F8> "<enter-command>set my_old_pipe_decode=\\\$pipe_decode my_old_wait_key=\\\$wait_key nopipe_decode nowait_key<enter><shell-escape>notmuch-mutt -r --prompt search<enter><change-folder-readonly>\`echo \${XDG_CACHE_HOME:-\$HOME/.cache}/notmuch/mutt/results\`<enter><enter-command>set pipe_decode=\\\$my_old_pipe_decode wait_key=\\\$my_old_wait_key<enter>i" "notmuch: search mail"
 
-macro index <F9> \
-"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
-<pipe-message>notmuch-mutt -r thread<enter>\
-<change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
-<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
-"notmuch: reconstruct thread"
+macro index <F9> "<enter-command>set my_old_pipe_decode=\\\$pipe_decode my_old_wait_key=\\\$wait_key nopipe_decode nowait_key<enter><pipe-message>notmuch-mutt -r thread<enter><change-folder-readonly>\`echo \${XDG_CACHE_HOME:-\$HOME/.cache}/notmuch/mutt/results\`<enter><enter-command>set pipe_decode=\\\$my_old_pipe_decode wait_key=\\\$my_old_wait_key<enter>" "notmuch: reconstruct thread"
 
-macro index l "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
+macro index l "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \\\$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \\\$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
 
 EOF
 
@@ -376,50 +362,50 @@ sudo apt -y install offlineimap
 FILEPATH=~/.offlineimaprc
 cat > ${FILEPATH} <<EOF
 [general]
-accounts = nnamdi,nnako
+accounts = private,dev
 
 
-# GENERAL
+# PRIVATE ACCOUNT
 
-[Account nnamdi]
-localrepository = NnamdiLocal
-remoterepository = NnamdiRemote
+[Account private]
+localrepository = PrivateLocal
+remoterepository = PrivateRemote
 #status_backend = sqlite
 postsynchook = notmuch new
 
-[Repository NnamdiRemote]
+[Repository PrivateRemote]
 type = IMAP
 remotehost = imap.1und1.de
-remoteuser = <username>
-remotepass = <password>
+remoteuser = <PRIVATE_ACCOUNT_NAME>
+remotepass = <PRIVATE_PASSWORD>
 ssl = yes
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
-[Repository NnamdiLocal]
+[Repository PrivateLocal]
 type = Maildir
-localfolders = ~/Mail/NnamdiKohn
+localfolders = ~/mail/<PRIVATE_ACCOUNT_USERNAME>
 restoreatime = no
 
 
-# NNAKO
+# DEVELOPER ACCOUNT
 
-[Account nnako]
-localrepository = NnakoLocal
-remoterepository = NnakoRemote
+[Account dev]
+localrepository = DevLocal
+remoterepository = DevRemote
 #status_backend = sqlite
 postsynchook = notmuch new
 
-[Repository NnakoRemote]
+[Repository DevRemote]
 type = IMAP
 remotehost = imap.web.de
-remoteuser = <username>
-remotepass = <password>
+remoteuser = <DEV_ACCOUNT_NAME>
+remotepass = <DEV_PASSWORD>
 ssl = yes
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
-[Repository NnakoLocal]
+[Repository DevLocal]
 type = Maildir
-localfolders = ~/Mail/Nnako
+localfolders = ~/mail/<DEV_ACCOUNT_USERNAME>
 restoreatime = no
 
 EOF
@@ -429,10 +415,11 @@ echo ''
 echo ''
 echo '##############################'
 echo ''
-echo 'IN ORDER TO COMPLETELY SETUP OFFLINEIMAP, PLEASE MAKE SURE TO DO THE FOLLOWING ACTIONS:'
+echo 'IN ORDER TO COMPLETELY SETUP OFFLINEIMAP,'
+echo 'PLEASE MAKE SURE TO DO THE FOLLOWING ACTIONS:'
 echo ''
 echo "1. open the file ${FILEPATH} and"
-echo '2. replace the values for <username> and <password> as fit'
+echo '2. replace the values for <.._ACCOUNT_NAME>, <.._ACCOUNT_USERNAME> and <.._PASSWORD> as fit'
 echo '3. after save, you can download the email using the following command:'
 echo ''
 echo '$ offlineimap'
@@ -442,7 +429,7 @@ echo ''
 echo ''
 
 # get mail
-offlineimap
+#offlineimap
 
 
 
@@ -497,33 +484,49 @@ tls_starttls on
 tls_trust_file /etc/ssl/certs/ca-certificates.crt
 logfile ~/.msmtp.log
 
-account nnamdi
+account private
 host smtp.1und1.de
 port 587
-from <from>
+from <FROM_EMAIL>
 auto_from off
 auth on
-user <username>
-password <password>
+user <PRIVATE_ACCOUNT_NAME>
+password <PRIVATE_ACCOUNT_PASSWORD>
 
-account nnako
+account dev
 host smtp.web.de
 port 587
-from <from>
+from <FROM_EMAIL>
 auto_from off
 auth on
-user <username>
-password <password>
+user <DEV_ACCOUNT_NAME>
+password <DEV_ACCOUNT_PASSWORD>
 
-account default: nnamdi
+account default: private
+
 EOF
+
+# user instructions
+echo ''
+echo ''
+echo '##############################'
+echo ''
+echo 'IN ORDER TO COMPLETELY SETUP MSMTP,'
+echo 'PLEASE MAKE SURE TO DO THE FOLLOWING ACTIONS:'
+echo ''
+echo "1. open the file ${FILEPATH} and"
+echo '2. replace the values for <.._ACCOUNT_NAME> and <.._ACCOUNT_PASSWORD> as fit'
+echo '3. after save, you can send emails from within mutt:'
+echo ''
+echo '##############################'
+echo ''
+echo ''
 
 # restrict access
 sudo chmod g-r ${FILEPATH}
 sudo chmod o-r ${FILEPATH}
 
 # create executable files in local bin folder
-mkdir ~/bin
 cp /usr/share/doc/msmtp/examples/msmtpqueue/msmtp-enqueue.sh ~/bin/
 cp /usr/share/doc/msmtp/examples/msmtpqueue/msmtp-runqueue.sh ~/bin/
 
@@ -584,34 +587,79 @@ MAXWAIT=120
 
 OPTIONS=$@
 
-# wait for a lock that another instance has set
+
+
+
+#
+# wait for MUTEX to be cleared
+#
+
+# another instance could have set this lock. until it is cleared, no write
+# operation should be performed. if the lock was set, a counter will ensure to
+# check for another 120 seconds (while checking) before continuing to the next
+# step in this sequence.
+
 WAIT=0
 while [ -e "$LOCKFILE" -a "$WAIT" -lt "$MAXWAIT" ]; do
 	sleep 1
 	WAIT="`expr "$WAIT" + 1`"
 done
+
+
+
+
+#
+# EXIT if MUTEX was not cleared
+#
+
 if [ -e "$LOCKFILE" ]; then
+
+    # EXIT this function
 	echo "Cannot use $QUEUEDIR: waited $MAXWAIT seconds for"
 	echo "lockfile $LOCKFILE to vanish, giving up."
 	echo "If you are sure that no other instance of this script is"
 	echo "running, then delete the lock file."
+
 	exit 1
 fi
 
-# change into $QUEUEDIR
+
+
+
+#
+# EXIT if no messages queued
+#
+
+# change into queue directory
 cd "$QUEUEDIR" || exit 1
 
 # check for empty queuedir
 if [ "`echo *.mail`" = '*.mail' ]; then
+
+    # EXIT this function
 	echo "No mails in $QUEUEDIR"
 	exit 0
 fi
 
-# lock the $QUEUEDIR
+
+
+
+#
+# set MUTEX
+#
+
 touch "$LOCKFILE" || exit 1
 
-# process all mails
+
+
+
+#
+# process queued messages
+#
+
 for MAILFILE in *.mail; do
+
+    # debug
 	MSMTPFILE="`echo $MAILFILE | sed -e 's/mail/msmtp/'`"
 	echo "*** Sending $MAILFILE to `sed -e 's/^.*-- \(.*$\)/\1/' $MSMTPFILE` ..."
 	if [ ! -f "$MSMTPFILE" ]; then
@@ -619,6 +667,14 @@ for MAILFILE in *.mail; do
 		echo "FAILURE"
 		continue
 	fi
+
+
+
+
+    #
+    # send mail
+    #
+
 	msmtp $OPTIONS `cat "$MSMTPFILE"` < "$MAILFILE"
 	if [ $? -eq 0 ]; then
 		rm "$MAILFILE" "$MSMTPFILE"
@@ -628,7 +684,13 @@ for MAILFILE in *.mail; do
 	fi
 done
 
-# remove the lock
+
+
+
+#
+# clear MUTEX
+#
+
 rm -f "$LOCKFILE"
 
 exit 0
@@ -691,6 +753,7 @@ cat > "$MAILFILE" || exit 1
 #fi
 
 exit 0
+
 EOF
 
 # make file executable
@@ -713,6 +776,7 @@ for i in $QUEUEDIR/*.mail; do
 	egrep -s --colour -h '(^From:|^To:|^Subject:)' "$i" || echo "No mail in queue";
 	echo " "
 done
+
 EOF
 
 # make file executable
@@ -732,10 +796,11 @@ echo ''
 echo ''
 echo '##############################'
 echo ''
-echo 'IN ORDER TO COMPLETELY SETUP EMAIL CHECK / SEND, PLEASE MAKE SURE MODIFY CRON TO DO THE FOLLOWING:'
+echo 'IN ORDER TO COMPLETELY SETUP EMAIL'
+echo 'CHECK / SEND, PLEASE MAKE SURE MODIFY'
+echo 'CRON TO DO THE FOLLOWING:'
 echo ''
-echo '$ notmuch setup'
-echo '$ notmuch new'
+echo '$ ...'
 echo ''
 echo '##############################'
 echo ''
