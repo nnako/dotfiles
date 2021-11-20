@@ -15,13 +15,57 @@ sudo apt update
 sudo apt install hplip cups
 sudo usermod -a -G lpadmin pi
 
-# 1.
-# In a browser, on the raspberry pi you can now access the CUPS configuration
-# screen at http://127.0.0.1:631/
+# user instructions
+echo ''
+echo ''
+echo '##############################'
+echo ''
+echo 'IN ORDER TO COMPLETELY SETUP CUPS,'
+echo 'PLEASE MAKE SURE TO DO THE FOLLOWING'
+echo 'ACTIONS:'
+echo ''
+echo '$ sudo cupsctl --remote-any'
+echo '$ sudo /etc/init.d/cups restart'
+echo ''
+echo 'then open http://192.168.1.<?>:631 using web browser'
+echo 'and go to tab "Drucker", recognize printer / scanner,'
+echo 'click on printer name, then "Verwaltung" and lastly,'
+echo '"Als Standarddrucker festlegen". this is the same as'
+echo 'issuing "$ lpoptions -d Officejet_Pro_8600".'
+echo ''
+echo 'now, connect local drivers to printer via its ip'
+echo ''
+echo '$ hp-setup -i 192.168.1.48'
+echo ''
+echo '##############################'
+echo ''
+echo ''
 
-# 2.
-# In a console, now interactively install the specific scanner driver by typing:
-# hp-setup -i <ip>     where <ip> is the IP address of the printer/scanner
+# now, the SCANNER should work
+
+# user instructions
+echo ''
+echo ''
+echo '##############################'
+echo ''
+echo 'IN ORDER TO COMPLETELY SETUP IMAGEMAGICK'
+echo 'AND ITS CONVERT FUNCTION, THE FOLLOWING'
+echo 'MODIFICATIONS HAVE TO BE MADE:'
+echo ''
+echo '1. open the convert configuration file:'
+echo ''
+echo '$ sudo vim /etc/ImageMagick-6/policy.xml'
+echo ''
+echo '2. comment out the one uncommented line'
+echo '   containing "PDF"'
+echo ''
+echo '3. save XML file'
+echo ''
+echo '##############################'
+echo ''
+echo ''
+
+# now, the convert function should not throw an error
 
 
 
@@ -31,32 +75,9 @@ sudo usermod -a -G lpadmin pi
 #
 
 sudo apt install sane
-sudo sane-find-scanner
+#sudo sane-find-scanner
 
 # the specific scanner should now be found
-
-
-
-
-#
-# set HP Officejet 8600 PRO as default printer
-#
-
-# user instructions
-echo ''
-echo ''
-echo '##############################'
-echo ''
-echo 'IN ORDER TO COMPLETELY SETUP THE PRINTER, PLEASE MAKE SURE TO DO THE FOLLOWING ACTIONS:'
-echo ''
-echo '$ lpoptions -d Officejet_Pro_8600'
-echo ''
-echo '##############################'
-echo ''
-echo ''
-
-# when printer was identified
-#lpoptions -d Officejet_Pro_8600
 
 
 
