@@ -16,8 +16,78 @@ sudo apt install urlview
 # install the application
 #
 
-sudo apt -y update
 sudo apt -y install mutt
+
+
+
+
+# create necessary folders
+mkdir ~/.mutt
+mkdir ~/.mutt/accounts
+mkdir ~/bin
+
+
+
+
+#
+# create account-specific folder configuration files
+#
+
+# create account configuration file
+FILEPATH=~/.mutt/accounts/dev
+cat > ${FILEPATH} <<EOF
+set from      = "<email>"
+set sendmail  = "~/bin/msmtp-enqueue.sh -a dev"
+#set folder    = "~/mail/<DEV_ACCOUNT_USERNAME>"
+#set spoolfile = "~/mail/<DEV_ACCOUNT_USERNAME>/INBOX"
+set spoolfile = "~/mail/<DEV_ACCOUNT_USERNAME>/Unbekannt"
+set mbox      = "~/mail/Archive"
+set record    = "~/mail/Sent"
+set postponed = "~/mail/Drafts"
+
+color status brightred blue
+EOF
+
+# create account configuration file
+FILEPATH=~/.mutt/accounts/private
+cat > ${FILEPATH} <<EOF
+set from      = "<email>"
+set sendmail  = "~/bin/msmtp-enqueue.sh -a private"
+#set folder    = "~/mail/<PRIVATE_ACCOUNT_USERNAME>"
+set spoolfile = "~/mail/<PRIVATE_ACCOUNT_USERNAME>/INBOX"
+set mbox      = "~/mail/Archive"
+set record    = "~/mail/Sent"
+set postponed = "~/mail/Drafts"
+
+color status white blue
+EOF
+
+
+
+
+#
+# create macro function files
+#
+
+# create account configuration file
+FILEPATH=~/.mutt/index_view__sort_by_date.rc
+cat > ${FILEPATH} <<EOF
+# small initialization script for setting DATE INDEX VIEW and setting index
+# key <shift> + <S> to return to THREADED VIEW
+
+set sort=date
+macro index S "<enter-command>source ~/.mutt/index_view__sort_threaded.rc<enter>"
+EOF
+
+# create account configuration file
+FILEPATH=~/.mutt/index_view__sort_threaded.rc
+cat > ${FILEPATH} <<EOF
+# small initialization script for setting THREADED INDEX VIEW and setting index
+# key <shift> + <S> to return to INDEX DATE VIEW
+
+set sort=threads
+macro index S "<enter-command>source ~/.mutt/index_view__sort_by_date.rc<enter>"
+EOF
 
 
 
