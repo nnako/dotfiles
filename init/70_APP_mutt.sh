@@ -551,7 +551,7 @@ sudo apt -y install network-manager
 
 # create CHECKMAIL script
 FILEPATH=~/bin/checkmail.sh
-cat > ${FILEPATH} <<EOF
+cat > ${FILEPATH} <<'EOF'
 #!/bin/sh
 
 STATE=`curl -Is http://www.google.com | head -n 1 | grep "200" | wc -l`
@@ -578,7 +578,7 @@ sudo chmod a+x ${FILEPATH}
 #
 
 FILEPATH=~/bin/msmtp-runqueue.sh
-cat > ${FILEPATH} <<EOF
+cat > ${FILEPATH} <<'EOF'
 #!/usr/bin/env bash
 
 QUEUEDIR="$HOME/.msmtpqueue"
@@ -708,7 +708,7 @@ sudo chmod a+x ${FILEPATH}
 #
 
 FILEPATH=~/bin/msmtp-enqueue.sh
-cat > ${FILEPATH} <<EOF
+cat > ${FILEPATH} <<'EOF'
 #!/usr/bin/env bash
 
 QUEUEDIR=$HOME/.msmtpqueue
@@ -767,7 +767,7 @@ sudo chmod a+x ${FILEPATH}
 #
 
 FILEPATH=~/bin/msmtp-listqueue.sh
-cat > ${FILEPATH} <<EOF
+cat > ${FILEPATH} <<'EOF'
 #!/usr/bin/env bash
 
 QUEUEDIR=$HOME/.msmtpqueue
