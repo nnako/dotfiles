@@ -268,7 +268,7 @@ bind  index,pager        a         group-reply
 # move message
 #macro index,pager        ss  "<enter-command> macro browser \\\\015 \"\<select-entry\>\<sync-mailbox\><enter-command> bind browser \\\\\\\\015 select-entry\\\\015<enter-command> bind browser q exit\\\\015\"\015<enter-command> macro browser q \"<exit><enter-command> bind browser \\\\\\\\015 select-entry\\\\015<enter-command> bind browser q exit\\\\015\"\015<save-message>?" "move message to a mailbox"
 macro index              sat ":macro browser \\\\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015\"\015:macro browser q \"<exit>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015'q<untag-pattern>.\\\\015\"\015<mark-message>q<enter><untag-pattern>.<enter><tag-thread><tag-prefix-cond><save-message>?" "move thread to a mailbox"
-#macro index              \;s ":macro browser \\\\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015\"\015:macro browser q \"<exit>:bind browser \\\\\\\\015 select-entry\\015:bind browser q exit\\\\015\"\015<tag-prefix-cond><save-message>?" "move tagged messages to a mailbox"
+#macro index              \;s ":macro browser \\\\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015\"\015:macro browser q \"<exit>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015\"\015<tag-prefix-cond><save-message>?" "move tagged messages to a mailbox"
 macro pager              sat ":macro browser \\\\015 \"\<select-entry\>\<sync-mailbox\>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015<display-message>\"\015:macro browser q \"<exit>:bind browser \\\\\\\\015 select-entry\\\\015:bind browser q exit\\\\015'q<untag-pattern>.\\\\015<display-message>\"\015<exit><mark-message>q<enter><untag-pattern>.<enter><tag-thread><tag-prefix><save-message>?" "move thread to a mailbox"
 
 # copy message
@@ -332,7 +332,7 @@ macro index <F8> "<enter-command>set my_old_pipe_decode=\\\$pipe_decode my_old_w
 
 macro index <F9> "<enter-command>set my_old_pipe_decode=\\\$pipe_decode my_old_wait_key=\\\$wait_key nopipe_decode nowait_key<enter><pipe-message>notmuch-mutt -r thread<enter><change-folder-readonly>\`echo \${XDG_CACHE_HOME:-\$HOME/.cache}/notmuch/mutt/results\`<enter><enter-command>set pipe_decode=\\\$my_old_pipe_decode wait_key=\\\$my_old_wait_key<enter>" "notmuch: reconstruct thread"
 
-macro index l "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \\\$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \\\$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only messages matching a notmuch pattern"
+macro index l "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \\\$x >~/.cache/mutt_terms<enter><limit>~i \"\\\`notmuch search --output=messages \\\$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\\\`\"<enter>" "show only messages matching a notmuch pattern"
 
 EOF
 
