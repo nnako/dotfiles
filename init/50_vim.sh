@@ -98,11 +98,11 @@ lstPluginUrl=(
     https://github.com/xolox/vim-misc.git
     https://github.com/MarcWeber/vim-addon-mw-utils.git
     https://github.com/xolox/vim-session.git
-    https://github.com/SirVer/ultisnips.git
     https://github.com/easymotion/vim-easymotion.git
     https://github.com/tomtom/tlib_vim.git
     https://github.com/tomtom/ttodo_vim.git
 )
+    #https://github.com/SirVer/ultisnips.git
     #https://github.com/ycm-core/YouCompleteMe.git
     #https://github.com/tmhedberg/simpylfold.git
     #https://github.com/klen/python-mode.git
