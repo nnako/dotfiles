@@ -91,6 +91,7 @@ pip install lxml         # needs libxslt-dev [APT] to be installed on system
 
 # GITLAB
 pip install python-gitlab
+pip install jira
 
 # GUI
 pip install easygui
