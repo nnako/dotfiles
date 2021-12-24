@@ -18,7 +18,11 @@ sudo apt install urlview
 # install the application
 #
 
+# mutt email editor
 sudo apt -y install mutt
+
+# utilities to manually handle maildir mails
+sudo apt -y install maildir-utils
 
 
 
