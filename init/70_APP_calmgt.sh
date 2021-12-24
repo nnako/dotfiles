@@ -28,6 +28,39 @@ fi
 
 
 #
+# get and install signal messenger application
+#
+
+# for sending signal messages. unfortunately, not all versions seem to run on a
+# Raspberry Pi computer. so, currently the version 0.8.1 with reduced
+# functionality (e.g. no deletion of messages possible)
+
+# general update of packages in the system
+sudo apt update
+sudo apt upgrade
+
+# this is a Java application
+sudo apt install default-jdk
+
+# required for authentication to display QR codes
+sudo apt install qrencode
+
+# get the command line application
+wget http://www.elzershark.com/iobroker/rpi_signal-cli-0.8.1.tar
+#wget https://github.com/AsamK/signal-cli/releases/download/v0.8.3/signal-cli-0.8.3.tar.gz
+ 
+# unpack the command line application
+sudo tar xf rpi_signal-cli-0.8.1.tar -C /opt
+#sudo tar xf signal-cli-0.8.3.tar.gz -C /opt
+ 
+# add link to executable
+sudo ln -sf /opt/signal-cli-0.8.1/bin/signal-cli /usr/local/bin/
+#sudo ln -sf /opt/signal-cli-0.8.3/bin/signal-cli /usr/local/bin/
+
+
+
+
+#
 # get / update relevant packages
 #
 
