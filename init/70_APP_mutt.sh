@@ -42,9 +42,6 @@ mkdir ~/bin
 # utilities to manually handle maildir mails
 sudo apt -y install maildir-utils
 
-# utility to read / write INI files
-sudo apt -y install crudini
-
 # abook contacts management
 sudo apt -y install abook
 
