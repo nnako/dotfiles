@@ -110,6 +110,7 @@ source $HOME/$envname/bin/activate
 pip install isoweek
 pip install pyinstaller  # in order to be able to easily build one-file
 pip install pudb         # TUI debugger
+pip install regex        # for recursive identification
 
 # EXCEL
 pip install xlrd
