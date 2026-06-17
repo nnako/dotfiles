@@ -338,6 +338,17 @@ bind editor              \Cn history-down
 
 
 #
+# ABOOK
+#
+
+set query_command= "abook --mutt-query '%s'"
+macro index,pager        a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
+bind editor              <Tab> complete-query
+
+
+
+
+#
 # URLSCAN - handle URLs
 #
 
