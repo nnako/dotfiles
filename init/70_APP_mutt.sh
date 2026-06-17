@@ -1,6 +1,9 @@
 
 sudo apt -y update
 
+# name of private project
+prjname="APP__archive-mail"
+
 
 
 
@@ -21,9 +24,6 @@ sudo apt install urlview
 # mutt email editor
 sudo apt -y install mutt
 
-# utilities to manually handle maildir mails
-sudo apt -y install maildir-utils
-
 
 
 
@@ -31,6 +31,31 @@ sudo apt -y install maildir-utils
 mkdir ~/.mutt
 mkdir ~/.mutt/accounts
 mkdir ~/bin
+
+
+
+
+#
+# install helper applications
+#
+
+# utilities to manually handle maildir mails
+sudo apt -y install maildir-utils
+
+# utility to read / write INI files
+sudo apt -y install crudini
+
+# abook contacts management
+sudo apt -y install abook
+
+# utility to transform maildir emails into human-readable format
+prjpath="pi@192.168.1.49:/home/pi/usbdrv/_bash/$prjname.git"
+# get project source code (if not already present)
+if [[ ! -d "$HOME/$prjname" ]]; then
+    git clone $prjpath $HOME/$prjname
+fi
+# create symbolic link in user's bin folder
+ln -s -f ~/$prjname/archive-mail.sh ~/bin/
 
 
 
