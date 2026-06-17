@@ -127,7 +127,7 @@ EOF
 # https://whatsecurity.nl/using-mutt_offline.html
 
 # configure mutt to use LOCAL mail storage
-FILEPATH=/home/pi/.mutt/muttrc
+FILEPATH=~/.mutt/muttrc
 cat > ${FILEPATH} <<EOF
 #
 # MAILBOX
@@ -558,8 +558,8 @@ sudo chmod g-r ${FILEPATH}
 sudo chmod o-r ${FILEPATH}
 
 # create executable files in local bin folder
-cp /usr/share/doc/msmtp/examples/msmtpqueue/msmtp-enqueue.sh ~/bin/
-cp /usr/share/doc/msmtp/examples/msmtpqueue/msmtp-runqueue.sh ~/bin/
+#cp /usr/share/doc/msmtp/examples/msmtpqueue/msmtp-enqueue.sh ~/bin/
+#cp /usr/share/doc/msmtp/examples/msmtpqueue/msmtp-runqueue.sh ~/bin/
 
 
 
