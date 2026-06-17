@@ -55,6 +55,16 @@ sudo apt -y install abook
 # create account-specific folder configuration files
 #
 
+# user instructions
+echo ''
+echo ''
+echo '##############################'
+echo ''
+echo 'IN ORDER TO COMPLETELY SETUP YOUR ACCOUNTS,'
+echo 'PLEASE MAKE SURE TO DO THE FOLLOWING ACTIONS:'
+echo ''
+echo "1. open the following files and"
+
 # create account configuration file
 FILEPATH=~/.mutt/accounts/dev
 cat > ${FILEPATH} <<EOF
@@ -70,6 +80,9 @@ set postponed = "~/Mail/Drafts"
 color status brightred blue
 EOF
 
+# user instructions
+echo "    -> ${FILEPATH}"
+
 # create account configuration file
 FILEPATH=~/.mutt/accounts/private
 cat > ${FILEPATH} <<EOF
@@ -83,6 +96,19 @@ set postponed = "~/Mail/Drafts"
 
 color status white blue
 EOF
+
+# user instructions
+echo "    -> ${FILEPATH}"
+
+# user instructions
+echo '2. replace the values for <.._ACCOUNT_NAME>, <.._ACCOUNT_USERNAME> and <.._PASSWORD> as fit'
+echo '3. after save, you can download the email using the following command:'
+echo ''
+echo '$ offlineimap'
+echo ''
+echo '##############################'
+echo ''
+echo ''
 
 
 
